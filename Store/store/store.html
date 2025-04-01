@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cửa hàng game trực tuyến với các sản phẩm chất lượng cho game thủ">
+    <title>Store - Cửa hàng game</title>
+    <link rel="stylesheet" href="/FontEnd/Store/css/store.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="/FontEnd/Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/FontEnd/Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/FontEnd/Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/FontEnd/Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/FontEnd/Home/favicon/site.webmanifest">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <a href="/FontEnd/Home/home/home.html">
+                <img src="/FontEnd/Home/img/logo.png" alt="Logo" class="logo">
+            </a>
+            <h1>STORE</h1>
+            <span class="menu-icon" onclick="toggleMenu()">☰</span>
+        </div>
+        <ul id="mobile-menu" class="mobile-menu">
+            <li><a href="/FontEnd/Home/home/home.html">Trang chủ</a></li>
+            <li><a href="/FontEnd/News/news/news.html">Tin tức</a></li>
+            <li><a href="/FontEnd/Esports/esports/esport.html">ESPORTS</a></li>
+            <li><a href="/FontEnd/Store/store.html">Store</a></li>
+            <li><a href="/FontEnd/Services/contact.html">Liên hệ</a></li>
+        </ul>
+    </header>
+    
+    <main>
+        <section class="products" id="product-list"></section>
+        <div id="cart-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" onclick="closeModal()">&times;</span>
+                <h2>Xác nhận mua hàng</h2>
+                <p id="cart-details"></p>
+                <button onclick="confirmPurchase()">Thanh toán</button>
+            </div>
+        </div>
+    </main>
+    
+<script>
+    function toggleMenu() {
+        document.getElementById("mobile-menu").classList.toggle("show");
+    }
+
+    const products = [
+        { name: "Skin Liên Quân", img: "../img/lq.jpg", desc: "Những bộ trang phục đẹp nhất.", price: 100000, stock: 50 },
+        { name: "UC PUBG Mobile", img: "../img/uc.jpg", desc: "Nạp UC giá ưu đãi.", price: 50000, stock: 50 },
+        { name: "Nguyên Thạch Genshin", img: "../img/nt.webp", desc: "Đổi lấy nhân vật yêu thích.", price: 50000, stock: 50 },
+        { name: "Vàng Free Fire", img: "../img/gff.png", desc: "Tiền trong game để mua vật phẩm.", price: 50000, stock: 50 },
+        { name: "Kim Cương Mobile Legends", img: "../img/kc.jpg", desc: "Mua tướng, skin.", price: 100000, stock: 50 },
+        { name: "V-Bucks Fortnite", img: "../img/fn.webp", desc: "Mua Battle Pass và skin.", price: 100000, stock: 50 },
+        { name: "Tiền GTA Online", img: "../img/gt.jpg", desc: "Mua xe, nhà, vũ khí.", price: 100000, stock: 50 },
+        { name: "Thẻ Garena", img: "../img/gr.png", desc: "Nạp vào game Garena.", price: 100000, stock: 50 },
+        { name: "Battle Pass Call of Duty", img: "../img/bb.avif", desc: "Mở khóa nội dung đặc biệt.", price: 150000, stock: 50 },
+        { name: "Gói Valorant Points", img: "../img/vp.jpg", desc: "Mua skin súng và Battle Pass.", price: 120000, stock: 50 },
+        { name: "Skin Apex Legends", img: "../img/ax.jpg", desc: "Trang phục huyền thoại độc quyền.", price: 130000, stock: 50 },
+        { name: "Bộ Tướng Tốc Chiến", img: "../img/ll.jpg", desc: "Mở khóa ngay những vị tướng mạnh.", price: 200000, stock: 50 }
+    ];
+
+    const productList = document.getElementById("product-list");
+    productList.innerHTML = products.map(product => `
+        <div class="product">
+            <img src="/FontEnd/Store/img/${product.img}" alt="${product.name}">
+            <h2>${product.name}</h2>
+            <p>${product.desc}</p>
+            <p class="price">Giá: ${product.price.toLocaleString("vi-VN")} VNĐ</p>
+            <input type="number" min="1" max="${product.stock}" value="1" class="quantity" data-name="${product.name}" data-price="${product.price}">
+            <button class="buy-button" onclick="addToCart(this)">Mua ngay</button>
+        </div>
+    `).join("");
+
+    function addToCart(button) {
+        const productDiv = button.parentElement;
+        const quantityInput = productDiv.querySelector(".quantity");
+        const quantity = parseInt(quantityInput.value);
+        const name = quantityInput.dataset.name;
+        const price = parseInt(quantityInput.dataset.price);
+        
+        document.getElementById("cart-details").innerHTML = `Bạn muốn mua <strong>${quantity}</strong> x <strong>${name}</strong> với giá <strong>${(quantity * price).toLocaleString("vi-VN")} VNĐ</strong>?`;
+        document.getElementById("cart-modal").style.display = "flex";
+
+        button.dataset.quantity = quantity;
+    }
+
+    function closeModal() {
+        document.getElementById("cart-modal").style.display = "none";
+    }
+
+    function confirmPurchase() {
+        const modal = document.getElementById("cart-modal");
+        const productName = modal.querySelector("strong:nth-child(2)").innerText;
+        
+        const product = products.find(p => p.name === productName);
+        if (!product) return;
+
+        const quantity = parseInt(document.querySelector(".buy-button[data-quantity]").dataset.quantity);
+        product.stock -= quantity;
+        
+        const quantityInput = document.querySelector(`.quantity[data-name='${productName}']`);
+        quantityInput.max = product.stock;
+        quantityInput.value = product.stock > 0 ? 1 : 0;
+
+        const button = quantityInput.nextElementSibling;
+        if (product.stock <= 0) {
+            button.disabled = true;
+            button.innerText = "Hết hàng";
+        }
+
+        alert("Thanh toán thành công! Cảm ơn bạn đã mua hàng.");
+        closeModal();
+    }
+</script>
+</body>
+</html>

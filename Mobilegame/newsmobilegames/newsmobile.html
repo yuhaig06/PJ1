@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News MobileGames</title>
+    <link rel="stylesheet" href="/FontEnd/Mobilegame/css/newsmobile.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="/FontEnd/Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/FontEnd/Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/FontEnd/Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/FontEnd/Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/FontEnd/Home/favicon/site.webmanifest">
+</head>
+<body>
+    <header id="header">
+        <a href="/FontEnd/Home/home/home.html" class="logo-link">
+            <img src="/FontEnd/Home/img/logo.png" alt="Logo WarStorm" class="logo">
+        </a>
+        <h1>News MobileGames</h1>
+        <button id="menu-toggle">☰</button>
+        <nav id="mobile-menu">
+            <ul>
+                <li><a href="/FontEnd/Home/home/home.html">Trang chủ</a></li>
+                <li><a href="/FontEnd/News/news/news.html">Tin tức</a></li>
+                <li><a href="/FontEnd/Esports/esports/esport.html">ESPORTS</a></li>
+                <li><a href="/FontEnd/Store/store.html">Store</a></li>
+                <li><a href="/FontEnd/Footer/contact.html">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="news-mobile-1">
+        <div class="mobile-item">
+            <img src="/FontEnd/Mobilegame/img/!1.webp" alt="1">
+            <h2>Choáng váng với một trận đấu Liên Quân kéo dài tới hơn 70 phút</h2>
+            <a href="/FontEnd/Mobilegame/detail/detail1.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item">
+            <img src="/FontEnd/Mobilegame/img/@1.webp" alt="2">
+            <h2>Genshin Impact bất ngờ “quay xe” với bộ đôi nhân vật mới, mang đến nhân vật 4 sao “mạnh nhất” lịch sử?</h2>
+            <a href="/FontEnd/Mobilegame/detail/detail2.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item">
+            <img src="/FontEnd/Mobilegame/img/~1.webp" alt="3">
+            <h2>PUBG MOBILE chiến thắng giải thưởng quốc tế Sensor Tower Apac Awards</h2>
+            <a href="/FontEnd/Mobilegame/detail/detail3.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item">
+            <img src="/FontEnd/Mobilegame/img/$1.webp" alt="4">
+            <h2>Team cày thuê tuyên bố kết thúc một trận đấu Liên Quân chỉ trong 4 phút, dưới 4 phút thì sao?</h2>
+            <a href="/FontEnd/Mobilegame/detail/detail4.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+    </section>
+
+    <section id="news-mobile-2">
+        <div class="mobile-item-sub hidden">
+            <img src="/FontEnd/Mobilegame/img/-1.webp" alt="5">
+            <h2>Sở hữu 300 triệu “Mora”, game thủ Genshin Impact nâng cấp thành công toàn bộ Thiên phú của 100 nhân vật!</h2>
+            <a href="/FontEnd/Mobilegame/detail/detail5.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item-sub hidden">
+            <img src="/FontEnd/Mobilegame/img/^1.webp" alt="6">
+            <h2>Sướng như tuyển thủ PUBG Mobile, vừa đạt thành tích cao vừa được hậu phương ủng hộ hết mình</h2>
+            <a href="/FontEnd/Mobilegame/detail/detail6.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item-sub hidden">
+            <img src="/FontEnd/Mobilegame/img/&1.webp" alt="7">
+            <h2>Đây là lý do Liên Quân “có nằm mơ” mới có thể đuổi kịp Vương Giả Vinh Diệu</h2>
+            <a href="/FontEnd/Mobilegame/detail/detail7.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item-sub hidden">
+            <img src="/FontEnd/Mobilegame/img/`1.webp" alt="8">
+            <h2>Tiếp tục hé lộ thêm danh tính của một nhân vật Genshin Impact mới, là một “siêu DPS”, có tạo hình “công chúa” cực đáng yêu?</h2>
+            <a href="/FontEnd/Mobilegame/detail/detail8.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+    </section>
+
+    <div class="load-more-wrapper">
+        <button class="btn-load-more" id="loadMoreBtn" aria-label="Tải thêm tin tức vào trang">Tải thêm bài viết</button>
+    </div>
+
+    <footer class="container bg-black text-center py-4">
+        <p>&copy; 2025 WarStorm. All rights reserved.</p>
+        <a href="/FontEnd/Footer/privacy-policy.html" class="text-danger">Chính sách bảo mật</a>
+        <a href="/FontEnd/Footer/terms-and-conditions.html" class="text-danger">Điều khoản sử dụng</a>
+        <a href="/FontEnd/Footer/contact.html" class="text-danger">Liên hệ</a>
+    </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const menuToggle = document.getElementById("menu-toggle");
+    const mobileMenu = document.getElementById("mobile-menu");
+
+    menuToggle.addEventListener("click", function () {
+        mobileMenu.classList.toggle("active");
+    });
+
+    document.addEventListener("click", function (event) {
+        if (!menuToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+            mobileMenu.classList.remove("active");
+        }
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function() {
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const hiddenMobiles = document.querySelectorAll(".mobile-item-sub.hidden");
+    let currentIndex = 0;
+    const mobilePerClick = 2;
+
+    loadMoreBtn.addEventListener("click", function() {
+        for (let i = currentIndex; i < currentIndex + mobilePerClick; i++) {
+            if (hiddenMobiles[i]) {
+                hiddenMobiles[i].classList.remove("hidden");
+            }
+        }
+
+        currentIndex += mobilePerClick;
+
+        if (currentIndex >= hiddenMobiles.length) {
+            loadMoreBtn.style.display = "none";
+        }
+    });
+});
+</script>
+</body>
+</html>

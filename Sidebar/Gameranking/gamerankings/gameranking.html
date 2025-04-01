@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Xếp Hạng Game</title>
+    <link rel="icon" type="image/png" sizes="96x96" href="/Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/Home/favicon/site.webmanifest">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+
+    .back-home {
+        display: inline-block;
+        margin: 10px 0;
+        padding: 10px 15px;
+        background: #ff6600;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+
+    .back-home:hover {
+        background: #e55a00;
+    }
+
+    .container {
+        width: 80%;
+        margin: 20px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        color: #333;
+    }
+
+    .game-list {
+        list-style: none;
+        padding: 0;
+    }
+
+    .game-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: #fff;
+        margin: 10px 0;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .game-item:hover {
+        transform: scale(1.02);
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .game-item img {
+    width: 180px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 8px;
+    }
+
+    .game-info {
+        flex: 1;
+        text-align: left;
+        margin-left: 15px;
+    }
+
+    .rank {
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #ff6600;
+        padding-right: 30px;
+        min-width: 50px;
+        display: inline-block;
+        text-align: center;
+    }
+</style>
+<body>
+    <a href="/FontEnd/Home/home/home.html" class="back-home">Quay lại Trang Chủ</a>
+    <div class="container">
+        <h1>Bảng Xếp Hạng Game</h1>
+        <ul class="game-list">
+            <li class="game-item">
+                <span class="rank">#1</span>
+                <img src="/FontEnd/Sidebar/img/lq.jpg" alt="Liên Quân Mobile">
+                <div class="game-info">
+                    <h2>Liên Quân Mobile</h2>
+                    <p>Tựa game MOBA hàng đầu với lối chơi chiến thuật và cộng đồng đông đảo.</p>
+                </div>
+            </li>
+            <li class="game-item">
+                <span class="rank">#2</span>
+                <img src="/FontEnd/Sidebar/img/pm.jpg" alt="PUBG Mobile">
+                <div class="game-info">
+                    <h2>PUBG Mobile</h2>
+                    <p>Trò chơi bắn súng sinh tồn nổi tiếng với đồ họa chân thực và gameplay hấp dẫn.</p>
+                </div>
+            </li>
+            <li class="game-item">
+                <span class="rank">#3</span>
+                <img src="/FontEnd/Sidebar/img/ff.jpg" alt="Free Fire">
+                <div class="game-info">
+                    <h2>Free Fire</h2>
+                    <p>Game bắn súng sinh tồn với lối chơi nhanh, phù hợp với nhiều cấu hình máy.</p>
+                </div>
+            </li>
+            <li class="game-item">
+                <span class="rank">#4</span>
+                <img src="/FontEnd/Sidebar/img/gi.jpg" alt="Genshin Impact">
+                <div class="game-info">
+                    <h2>Genshin Impact</h2>
+                    <p>Tựa game nhập vai thế giới mở với đồ họa tuyệt đẹp và cốt truyện sâu sắc.</p>
+                </div>
+            </li>
+            <li class="game-item">
+                <span class="rank">#5</span>
+                <img src="/FontEnd/Sidebar/img/cd.jpg" alt="Call of Duty">
+                <div class="game-info">
+                    <h2>Call of Duty</h2>
+                    <p>Phiên bản di động của series bắn súng huyền thoại, mang đến trải nghiệm FPS chất lượng cao.</p>
+                </div>
+            </li>
+            <li class="game-item">
+                <span class="rank">#6</span>
+                <img src="/FontEnd/Sidebar/img/pg.jpg" alt="Pokémon Go">
+                <div class="game-info">
+                    <h2>Pokémon Go</h2>
+                    <p>Trò chơi thực tế ảo tăng cường, cho phép người chơi bắt Pokémon trong thế giới thực.</p>
+                </div>
+            </li>
+            <li class="game-item">
+                <span class="rank">#7</span>
+                <img src="/FontEnd/Sidebar/img/ll.webp" alt="Đấu Trường Chân Lý Mobile">
+                <div class="game-info">
+                    <h2>Đấu Trường Chân Lý Mobile</h2>
+                    <p>Phiên bản di động của game cờ nhân phẩm nổi tiếng từ Liên Minh Huyền Thoại.</p>
+                </div>
+            </li>
+            <li class="game-item">
+                <span class="rank">#8</span>
+                <img src="/FontEnd/Sidebar/img/ll1.jpg" alt="LMHT: Tốc Chiến">
+                <div class="game-info">
+                    <h2>LMHT: Tốc Chiến</h2>
+                    <p>Phiên bản mobile của Liên Minh Huyền Thoại, mang đến trải nghiệm MOBA đỉnh cao trên di động.</p>
+                </div>
+            </li>
+            <li class="game-item">
+                <span class="rank">#9</span>
+                <img src="/FontEnd/Sidebar/img/dr.jpg" alt="Dragon Raja">
+                <div class="game-info">
+                    <h2>Dragon Raja</h2>
+                    <p>Game nhập vai với đồ họa ấn tượng và thế giới mở rộng lớn.</p>
+                </div>
+            </li>
+            <li class="game-item">
+                <span class="rank">#10</span>
+                <img src="/FontEnd/Sidebar/img/rk.jpg" alt="Rise of Kingdoms">
+                <div class="game-info">
+                    <h2>Rise of Kingdoms</h2>
+                    <p>Trò chơi chiến thuật xây dựng đế chế với lối chơi đa dạng và cộng đồng lớn mạnh.</p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>
