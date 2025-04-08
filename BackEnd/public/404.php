@@ -66,10 +66,10 @@
         <p>Rất tiếc, trang bạn yêu cầu không tồn tại. Hãy thử tìm lại hoặc quay về trang chủ.</p>
         
         <div class="img-container">
-            <img src="assets/img/icon404.png" alt="404 Image">
+            <img src="assets/img/iconerror.png" alt="404 Image">
         </div>
 
-        <a href="/PJ1/" class="btn btn-primary mt-3">Quay lại trang chủ</a>
+        <a href="../../FrontEnd/Home/home/home.html" class="btn btn-primary mt-3">Quay lại trang chủ</a>
     </div>
 </body>
 </html>

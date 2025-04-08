@@ -9,18 +9,11 @@ use PDO;
 class UserModel extends Model
 {
     protected $table = 'users';
-    protected $fillable = [
-        'username', 'email', 'password', 'full_name', 'avatar',
-        'role', 'status', 'email_verified_at', 'remember_token',
-        'last_login', 'last_activity'
-    ];
+    protected $fillable = ['username', 'email', 'password'];
 
-    private $db;
-
-    public function __construct(PDO $db)
+    public function __construct()
     {
         parent::__construct();
-        $this->db = $db;
     }
 
     /**
@@ -240,7 +233,11 @@ class UserModel extends Model
         return false;
     }
 
-    public function getById($id)
+    /**
+     * @param int $id
+     * @return array|null
+     */
+    public function getById(int $id): ?array
     {
         $sql = "SELECT * FROM users WHERE id = :id";
         $stmt = $this->db->prepare($sql);
@@ -328,5 +325,37 @@ class UserModel extends Model
         $stmt->bindParam(':id', $id);
         
         return $stmt->execute();
+    }
+
+    public function findOne($conditions = []) {
+        $sql = "SELECT * FROM {$this->table} WHERE 1=1";
+        $params = [];
+        
+        foreach ($conditions as $key => $value) {
+            $sql .= " AND {$key} = ?";
+            $params[] = $value;
+        }
+
+        $stmt = $this->query($sql, $params);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function findAll($conditions = []) {
+        $sql = "SELECT * FROM {$this->table} WHERE 1=1";
+        $params = [];
+        
+        foreach ($conditions as $key => $value) {
+            $sql .= " AND {$key} = ?";
+            $params[] = $value;
+        }
+
+        $stmt = $this->query($sql, $params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function findById(int $id): ?array {
+        $stmt = $this->db->prepare("SELECT * FROM users WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->fetch(\PDO::FETCH_ASSOC) ?: null;
     }
 }

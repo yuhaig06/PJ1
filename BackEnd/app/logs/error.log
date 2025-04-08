@@ -26,3 +26,166 @@ Stack trace:
 #2 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(31): App->__construct()
 #3 {main}
   thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[08-Apr-2025 12:54:52 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\init.php(11): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[08-Apr-2025 12:55:04 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\init.php(11): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[08-Apr-2025 12:55:27 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(31): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[08-Apr-2025 12:55:31 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\init.php(11): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[08-Apr-2025 12:55:31 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\init.php(11): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[08-Apr-2025 13:08:07 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(31): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[08-Apr-2025 13:08:12 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(31): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[08-Apr-2025 13:09:18 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(31): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[08-Apr-2025 13:09:18 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(31): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[08-Apr-2025 14:16:18 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "HomeController" not found in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php:39
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#1 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php on line 39
+[08-Apr-2025 14:16:19 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "HomeController" not found in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php:39
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#1 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php on line 39
+[08-Apr-2025 14:18:00 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Models\UserModel::$db must be protected (as in class App\Core\Model) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 9
+[08-Apr-2025 14:18:01 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Models\UserModel::$db must be protected (as in class App\Core\Model) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 9
+[08-Apr-2025 14:19:20 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Models\UserModel::$db must be protected (as in class App\Core\Model) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 9
+[08-Apr-2025 14:19:21 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Models\UserModel::$db must be protected (as in class App\Core\Model) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 9
+[08-Apr-2025 14:19:21 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Models\UserModel::$db must be protected (as in class App\Core\Model) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 9
+[08-Apr-2025 14:19:22 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Models\UserModel::$db must be protected (as in class App\Core\Model) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 9
+[08-Apr-2025 14:20:37 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Models\UserModel::__construct(), 0 passed in D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php on line 22 and exactly 1 expected in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php:20
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php(22): App\Models\UserModel->__construct()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php(16): App\Core\Controller->model('UserModel')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(40): App\Core\Controller->__construct()
+#3 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#4 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 20
+[08-Apr-2025 14:20:37 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Models\UserModel::__construct(), 0 passed in D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php on line 22 and exactly 1 expected in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php:20
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php(22): App\Models\UserModel->__construct()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php(16): App\Core\Controller->model('UserModel')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(40): App\Core\Controller->__construct()
+#3 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#4 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 20
+[08-Apr-2025 14:22:00 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Models\UserModel::__construct(), 0 passed in D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php on line 22 and exactly 1 expected in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php:14
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php(22): App\Models\UserModel->__construct()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php(16): App\Core\Controller->model('UserModel')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(40): App\Core\Controller->__construct()
+#3 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#4 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 14
+[08-Apr-2025 14:22:01 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Models\UserModel::__construct(), 0 passed in D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php on line 22 and exactly 1 expected in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php:14
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php(22): App\Models\UserModel->__construct()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php(16): App\Core\Controller->model('UserModel')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(40): App\Core\Controller->__construct()
+#3 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#4 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 14
+[08-Apr-2025 14:22:01 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function App\Models\UserModel::__construct(), 0 passed in D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php on line 22 and exactly 1 expected in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php:14
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php(22): App\Models\UserModel->__construct()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\Controller.php(16): App\Core\Controller->model('UserModel')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(40): App\Core\Controller->__construct()
+#3 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#4 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\UserModel.php on line 14
+[08-Apr-2025 14:23:48 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught TypeError: Illegal offset type in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php:85
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(54): App\Core\App->checkAccess()
+#1 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#2 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php on line 85
+[08-Apr-2025 14:23:49 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught TypeError: Illegal offset type in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php:85
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(54): App\Core\App->checkAccess()
+#1 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#2 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php on line 85
+[08-Apr-2025 14:24:51 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught TypeError: strtolower(): Argument #1 ($string) must be of type string, App\Controllers\HomeController given in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php:72
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(72): strtolower(Object(App\Controllers\HomeController))
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(20): App\Core\App->checkAccess()
+#2 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php on line 72
+[08-Apr-2025 14:24:53 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught TypeError: strtolower(): Argument #1 ($string) must be of type string, App\Controllers\HomeController given in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php:72
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(72): strtolower(Object(App\Controllers\HomeController))
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(20): App\Core\App->checkAccess()
+#2 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(54): App\Core\App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php on line 72
+[08-Apr-2025 14:31:27 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App" not found in D:\xampp\htdocs\PJ1\BackEnd\app\init.php:11
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\init.php on line 11
+[08-Apr-2025 14:44:40 Asia/Ho_Chi_Minh] PHP Warning:  Undefined array key 0 in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php on line 21
+[08-Apr-2025 14:44:41 Asia/Ho_Chi_Minh] PHP Warning:  Undefined array key 0 in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php on line 21
+[08-Apr-2025 14:44:42 Asia/Ho_Chi_Minh] PHP Warning:  Undefined array key 0 in D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php on line 21
+[08-Apr-2025 14:52:59 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 13
+[08-Apr-2025 14:56:36 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 13
+[08-Apr-2025 15:23:59 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 15
+[08-Apr-2025 15:58:59 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 16
+[08-Apr-2025 16:14:11 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 17
+[08-Apr-2025 16:14:11 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 17
+[08-Apr-2025 16:14:12 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 17
+[08-Apr-2025 16:19:32 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 17
+[08-Apr-2025 16:19:33 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 17
+[08-Apr-2025 16:48:46 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 17
+[08-Apr-2025 16:56:06 Asia/Ho_Chi_Minh] PHP Fatal error:  Access level to App\Controllers\NewsController::$db must be protected (as in class App\Core\Controller) or weaker in D:\xampp\htdocs\PJ1\BackEnd\app\controllers\NewsController.php on line 17

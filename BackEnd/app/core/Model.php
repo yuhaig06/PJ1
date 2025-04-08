@@ -1,4 +1,10 @@
 <?php
+namespace App\Core;
+
+use PDO;
+use PDOException;
+use Exception;
+
 class Model {
     protected $db;
     protected $table;
@@ -6,9 +12,78 @@ class Model {
     protected $fillable = [];
     protected $hidden = ['password'];
     protected $timestamps = true;
+    protected $builder;
+    protected $stmt;
 
     public function __construct() {
-        $this->db = Database::getInstance();
+        try {
+            $this->db = Database::getInstance();
+            $this->builder = new QueryBuilder($this->db->getConnection());
+        } catch (Exception $e) {
+            throw new Exception('Failed to initialize database connection');
+        }
+    }
+
+    protected function prepare($sql) {
+        try {
+            $this->stmt = $this->db->prepare($sql);
+            return $this->stmt;
+        } catch (PDOException $e) {
+            throw new \Exception("Failed to prepare query: " . $e->getMessage());
+        }
+    }
+
+    protected function execute($params = []) {
+        try {
+            return $this->stmt->execute($params);
+        } catch (PDOException $e) {
+            throw new \Exception("Failed to execute query: " . $e->getMessage());
+        }
+    }
+
+    protected function getDbConnection() {
+        if (!$this->db) {
+            throw new PDOException('Database connection not initialized');
+        }
+        $connection = $this->db->getConnection();
+        if (!$connection) {
+            throw new PDOException('Invalid database connection');
+        }
+        return $connection;
+    }
+
+    protected function prepareQuery($sql) {
+        return $this->getDbConnection()->prepare($sql);
+    }
+
+    protected function executeQuery($stmt, $params = []) {
+        try {
+            return $stmt->execute($params);
+        } catch (PDOException $e) {
+            throw new PDOException('Query execution failed: ' . $e->getMessage());
+        }
+    }
+
+    protected function query($sql, $params = []) {
+        $stmt = $this->prepareQuery($sql);
+        $this->executeQuery($stmt, $params);
+        return $stmt;
+    }
+
+    protected function single() {
+        return $this->db->single();
+    }
+
+    protected function resultSet() {
+        return $this->db->resultSet();
+    }
+
+    protected function lastInsertId() {
+        return $this->db->lastInsertId();
+    }
+
+    protected function rowCount() {
+        return $this->db->rowCount();
     }
 
     // Lấy tất cả records
@@ -19,16 +94,12 @@ class Model {
 
     // Lấy record theo ID
     public function find($id) {
-        $this->db->query("SELECT * FROM {$this->table} WHERE {$this->primaryKey} = :id");
-        $this->db->bind(':id', $id);
-        return $this->db->single();
+        return $this->query("SELECT * FROM {$this->table} WHERE {$this->primaryKey} = ?", [$id])->fetch(PDO::FETCH_OBJ);
     }
 
     // Tìm record theo điều kiện
     public function where($column, $value) {
-        $this->db->query("SELECT * FROM {$this->table} WHERE {$column} = :value");
-        $this->db->bind(':value', $value);
-        return $this->db->resultSet();
+        return $this->query("SELECT * FROM {$this->table} WHERE {$column} = ?", [$value])->fetchAll(PDO::FETCH_OBJ);
     }
 
     // Tìm record đầu tiên theo điều kiện
@@ -126,7 +197,7 @@ class Model {
     }
 
     // Ẩn các trường nhạy cảm
-    protected function hideFields($data) {
+    protected function hideFields(array|object $data) {
         if(is_object($data)) {
             $data = (array)$data;
         }
@@ -136,5 +207,26 @@ class Model {
         }
         
         return $data;
+    }
+
+    protected function prepareAndExecute($sql, $params = []) {
+        try {
+            $stmt = $this->db->getConnection()->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
+        } catch (PDOException $e) {
+            throw new \Exception("Query failed: " . $e->getMessage());
+        }
+    }
+
+    protected function getConnection() {
+        if (!$this->db) {
+            throw new \Exception('Database connection not initialized');
+        }
+        $connection = $this->db->getConnection();
+        if (!$connection) {
+            throw new \Exception('Invalid database connection');
+        }
+        return $connection;
     }
 }

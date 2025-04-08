@@ -1,21 +1,26 @@
 <?php
-class CommentModel {
-    private $db;
+namespace App\Models;
+
+use App\Core\Model;
+use PDO;
+
+class CommentModel extends Model {
+    protected $table = 'comments';
+    protected $fillable = ['news_id', 'user_id', 'content', 'parent_id'];
 
     public function __construct() {
-        $this->db = new Database;
+        parent::__construct();
     }
 
-    // Lấy tất cả bình luận của một tin tức
-    public function getCommentsByNewsId($newsId) {
-        $this->db->query('SELECT c.*, u.username, u.avatar 
-                         FROM comments c 
-                         JOIN users u ON c.user_id = u.id 
-                         WHERE c.news_id = :news_id AND c.status = "approved" 
-                         ORDER BY c.created_at DESC');
-        
-        $this->db->bind(':news_id', $newsId);
-        return $this->db->resultSet();
+    public function getByNewsId($newsId, $limit = 10, $offset = 0) {
+        $sql = "SELECT c.*, u.username, u.avatar 
+                FROM comments c 
+                JOIN users u ON c.user_id = u.id 
+                WHERE c.news_id = ? AND c.status = 'approved' 
+                ORDER BY c.created_at DESC 
+                LIMIT ? OFFSET ?";
+
+        return $this->query($sql, [$newsId, $limit, $offset])->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // Lấy các bình luận con của một bình luận
@@ -78,4 +83,13 @@ class CommentModel {
         
         return $result->count;
     }
-} 
+
+    public function getById($id) {
+        $sql = "SELECT c.*, u.username, u.avatar 
+                FROM comments c 
+                JOIN users u ON c.user_id = u.id 
+                WHERE c.id = ?";
+
+        return $this->query($sql, [$id])->fetch(PDO::FETCH_ASSOC);
+    }
+}

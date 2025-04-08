@@ -2,10 +2,13 @@
 
 namespace App\Middleware;
 
+use App\Config\Database;
+
 class RateLimitMiddleware {
     private $db;
     private $maxRequests = 100; // Số request tối đa
     private $timeWindow = 3600; // Thời gian (giây) - mặc định 1 giờ
+    private $limits = [];
 
     public function __construct() {
         $this->db = Database::getInstance();
@@ -71,5 +74,36 @@ class RateLimitMiddleware {
     public function setLimit($maxRequests, $timeWindow = 3600) {
         $this->maxRequests = $maxRequests;
         $this->timeWindow = $timeWindow;
+    }
+
+    public function checkLimit($action, $maxAttempts, $timeWindow) {
+        $userId = $_SESSION['user_id'] ?? 'guest';
+        $key = "{$userId}:{$action}";
+        
+        // Initialize limit record if not exists
+        if (!isset($this->limits[$key])) {
+            $this->limits[$key] = [
+                'attempts' => 0,
+                'last_attempt' => time()
+            ];
+        }
+
+        $limit = &$this->limits[$key];
+
+        // Reset attempts if time window has passed
+        if (time() - $limit['last_attempt'] > $timeWindow) {
+            $limit['attempts'] = 0;
+        }
+
+        // Check if limit exceeded
+        if ($limit['attempts'] >= $maxAttempts) {
+            return false;
+        }
+
+        // Update limit record
+        $limit['attempts']++;
+        $limit['last_attempt'] = time();
+        
+        return true;
     }
 }

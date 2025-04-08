@@ -1,9 +1,15 @@
 <?php
+namespace App\Core;
+
+use PDO;
+use PDOException;
+use Exception;
+
 class Database {
-    private $host = DB_HOST;
-    private $user = DB_USER;
-    private $pass = DB_PASS;
-    private $dbname = DB_NAME;
+    private $host;
+    private $user;
+    private $pass;
+    private $dbname;
 
     private $dbh;
     private $stmt;
@@ -13,6 +19,12 @@ class Database {
     private $queryLog = [];
 
     public function __construct() {
+        // Load database config
+        $this->host = DB_HOST;
+        $this->user = DB_USER;
+        $this->pass = DB_PASS;
+        $this->dbname = DB_NAME;
+        
         $this->connect();
     }
 
@@ -146,7 +158,7 @@ class Database {
         } catch(PDOException $e) {
             $this->error = $e->getMessage();
             $this->logError($this->error);
-            throw new Exception('Transaction commit failed: ' . $this->error);
+            throw new Exception('Transaction commit failed: ' . $e->getMessage());
         }
     }
 
@@ -157,7 +169,7 @@ class Database {
         } catch(PDOException $e) {
             $this->error = $e->getMessage();
             $this->logError($this->error);
-            throw new Exception('Transaction rollback failed: ' . $this->error);
+            throw new Exception('Transaction rollback failed: ' . $e->getMessage());
         }
     }
 
@@ -177,9 +189,13 @@ class Database {
     }
 
     // Log error to file
-    private function logError($error) {
+    private function logError(string $error) {
+        $logDir = dirname(__DIR__) . '/logs';
+        if (!is_dir($logDir)) {
+            mkdir($logDir, 0777, true);
+        }
         $logMessage = date('Y-m-d H:i:s') . ' - ' . $error . "\n";
-        error_log($logMessage, 3, dirname(__DIR__) . '/logs/database.log');
+        error_log($logMessage, 3, $logDir . '/database.log');
     }
 
     // Get last error
@@ -203,7 +219,7 @@ class Database {
         $this->dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
     }
 
-    private function handleQueryError($e, $query) {
+    private function handleQueryError(\PDOException $e, string $query) {
         $errorMsg = sprintf(
             "Query failed: %s\nError: %s\nFile: %s\nLine: %d",
             $query,
@@ -212,6 +228,31 @@ class Database {
             $e->getLine()
         );
         $this->logError($errorMsg);
-        throw new \Exception('Database query failed: ' . $e->getMessage());
+        throw new Exception('Database query failed: ' . $e->getMessage());
+    }
+
+    public function getConnection() {
+        return $this->dbh;
+    }
+
+    // Thêm method mới để thực hiện query an toàn
+    public function prepareAndExecute($sql, $params = []) {
+        try {
+            $stmt = $this->dbh->prepare($sql);
+            $stmt->execute($params);
+            return $stmt;
+        } catch (PDOException $e) {
+            $this->logError($e->getMessage());
+            throw new \Exception("Query failed: " . $e->getMessage());
+        }
+    }
+
+    public function prepare($sql) {
+        try {
+            return $this->dbh->prepare($sql);
+        } catch(PDOException $e) {
+            $this->logError($e->getMessage());
+            throw new \Exception('Prepare statement failed: ' . $e->getMessage());
+        }
     }
 }
