@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bom tấn từng 1,8 triệu nay giảm còn chưa tới 150k, game thủ tranh thủ sở hữu!</title>
+    <link rel="icon" type="image/png" sizes="96x96" href="../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../Home/favicon/site.webmanifest">
+</head>
+<style>
+    body {
+        background: #121212;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 20px;
+        padding-top: 60px;
+    }
+    h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+    p {
+        text-align: justify;
+        line-height: 1.6;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #FF4C4C;
+        padding: 10px 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+        transition: color 0.3s ease;
+    }
+    nav a:hover {
+        color: #FFD700;
+    }
+    .main-content {
+        max-width: 1200px;
+        margin: 80px auto 20px;
+        padding: 20px;
+        background: #1e1e1e;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    }
+    img {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        display: block;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .time-display {
+        position: absolute;
+        top: 70px;
+        left: 20px;
+        font-size: 14px;
+        color: #B0B0B0;
+        background: #1e1e1e;
+        padding: 5px 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+</style>
+<body>
+    <nav>
+        <a href="../news/news.html">Quay Lại Tin Tức</a>
+    </nav>
+    <div class="time-display" id="time"></div>
+    <section class="main-content">
+        <h1>Từng có giá 1,8 triệu, bom tấn bất ngờ giảm giá mạnh, game thủ sở hữu chỉ với chưa tới 150k</h1>
+        <h4>Tựa game này lại tiếp tục sale sập sàn thêm một lần nữa.</h4>
+        <h5>Trước khi ra mắt, Suicide Squad: Kill The Justice League được kỳ vọng sẽ trở thành tựa game "ăn khách" tiếp theo của Warner Bros sau bộ ba Arkham đình đám.</h5>
+        <p>Thế nhưng hy vọng càng nhiều thì thất vọng càng lớn. Chỉ chưa đầy một năm sau khi ra mắt, Suicide Squad: Kill The Justice League đã gần như "rút ống thở". Thậm chí, nhà phát triển của trò chơi còn khẳng định bản cập nhật trước đó đã là cuối cùng dành cho bom tấn này.</p>
+        <img src="../img/8.1.webp" alt="">
+        <h3>Thế nhưng không thể phủ nhận, bỏ qua một số yếu tố, Suicide Squad: Kill The Justice League vẫn là một tựa game khá chất lượng, nhất là với mức giá đang được sale off tới 90% của nó trên Steam.</h3>
+        <p>Không còn gắn mác 70$ như trước, giờ đây, các game thủ có thể sở hữu ngay Suicide Squad: Kill The Justice League với số tiền ít ỏi, chỉ chưa tới 150.000 VND. Mặc dù gần như chắc chắn rằng trò chơi sẽ không có thêm bất kỳ bản cập nhật nào nữa, thế nhưng rõ ràng thời lượng nội dung cùng với các yếu tố nhập vai thú vị vẫn khiến Suicide Squad: Kill The Justice League trở thành một deal quá hời.</p>
+        <img src="../img/8.webp" alt="">
+        <p>Được biết, Suicide Squad: Kill The Justice League giảm giá nhân dịp sự kiện kỷ niệm ngày sinh của Batman. Dành cho những ai chưa biết, Batman có ba ngày sinh. Ngày 19/2 là mốc thời gian chính thức, và còn một ngày nữa vào 30/3 trong khi lần đầu tiên Bruce Wayne xuất hiện trong truyện tranh cũng là một ngày sinh khác, tổ chức vào 7/4. Và Suicide Squad: Kill The Justice League được giảm giá nhân dịp ngày sinh nhật chính thống của Batman.</p>
+        <img src="../img/8.2.webp" alt="">
+        <p>Chương trình khuyến mại của Suicide Squad: Kill The Justice League sẽ kéo dài cho tới ngày 27/2 tới đây. Chương trình khuyến mại này cũng bao gồm giảm giá mạnh cho tất cả các trò chơi Arkham khác.</p>   
+    </section>
+    <script>
+        function updateTime() {
+            const timeElement = document.getElementById("time");
+            const now = new Date();
+            const formattedTime = now.toLocaleString("vi-VN", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+            }).replace(',', '');
+        timeElement.textContent = "⌚" + formattedTime;
+        }
+        updateTime();
+    </script>       
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký</title>
+    <link rel="icon" type="image/png" sizes="96x96" href="../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../Home/favicon/site.webmanifest">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-box" id="register-box">
+            <div class="logo-container">
+                <img src="../../Home/img/logo.png" alt="Logo" class="logo">
+            </div>
+            <h2>Đăng ký tài khoản</h2>
+            <form id="registerForm" onsubmit="return handleRegister(event)">
+                <div class="input-group">
+                    <input type="text" id="username" placeholder="Tên đăng nhập" required>
+                    <span class="input-icon">👤</span>
+                </div>
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                    <span class="input-icon">✉</span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Mật khẩu" required>
+                    <span class="input-icon">🔒</span>
+                    <span class="password-toggle" onclick="togglePassword('password')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                    <span class="input-icon">🔒</span>
+                    <span class="password-toggle" onclick="togglePassword('confirmPassword')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <div class="terms">
+                    <label>
+                        <input type="checkbox" id="agreeTerms" required>
+                        Tôi đồng ý với <a href="../../Footer/terms-and-conditions.html">điều khoản sử dụng</a>
+                    </label>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span>Đăng ký</span>
+                    <span class="btn-icon">→</span>
+                </button>
+                <p class="switch-form">Đã có tài khoản? <a href="../Login/login.html">Đăng nhập</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../config/api.js"></script>
+    <script>
+        // Check if user is already logged in
+        if (API.auth.isAuthenticated()) {
+            window.location.href = '../../Home/home/home.html';
+        }
+
+        async function handleRegister(event) {
+            event.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validate password match
+            if (password !== confirmPassword) {
+                showError('Mật khẩu xác nhận không khớp');
+                return false;
+            }
+            
+            // Validate password strength
+            if (password.length < 8) {
+                showError('Mật khẩu phải có ít nhất 8 ký tự');
+                return false;
+            }
+            
+            try {
+                const userData = {
+                    username,
+                    email,
+                    password
+                };
+                
+                const success = await API.auth.register(userData);
+                if (success) {
+                    window.location.href = '../../Home/home/home.html';
+                } else {
+                    showError('Đăng ký thất bại. Vui lòng thử lại.');
+                }
+            } catch (error) {
+                showError('Có lỗi xảy ra trong quá trình đăng ký');
+            }
+            
+            return false;
+        }
+
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            
+            const form = document.getElementById('registerForm');
+            form.insertBefore(errorDiv, form.firstChild);
+            
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 3000);
+        }
+
+        // Add animation to form elements
+        document.querySelectorAll('.input-group').forEach((group, index) => {
+            group.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling.nextElementSibling.querySelector('i');
+            
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>

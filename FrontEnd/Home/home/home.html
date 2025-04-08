@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang Chủ</title>
+    <link rel="stylesheet" href="../css/home.css">
+    <link rel="stylesheet" href="../themify-icons/themify-icons.css">
+    <link rel="stylesheet" href="../fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../favicon/site.webmanifest">
+    <script src="../../config/api.js"></script>
+</head>
+<body>
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="spinner"></div>
+    </div>
+
+    <header id="header">
+        <div class="col-auto">
+            <img src="../img/logo.png" alt="Logo" class="logo">
+        </div>
+    
+        <ul class="nav">
+            <li><a href="home.html">Trang chủ</a></li>
+            <li><a href="../../News/news/news.html">Tin tức</a></li>
+            <li><a href="../../Esports/esports/esport.html">ESPORTS</a></li>
+            <li><a href="../../Store/store/store.html">Cửa hàng</a></li>
+            <li><a href="../../Footer/contact.html">Liên hệ</a></li>
+        </ul>
+    
+        <div class="col-auto">
+            <button class="menu-toggle" onclick="toggleMenu()">☰</button> 
+            <button id="search-toggle" onclick="toggleSearchBox()">🔍 TÌM KIẾM</button>
+            <div id="search-box" class="search-box">
+                <input type="text" id="search-input" placeholder="Nhập từ khóa..." />
+                <button onclick="searchGames()">🔎 Tìm kiếm</button>
+            </div>
+            <div id="auth-section">
+                <!-- Sẽ được tự động cập nhật bởi updateAuthSection() -->
+            </div>
+        </div>
+    </header>    
+
+    <section id="hero-section">
+        <img src="../img/a1.webp" alt="Banner" class="img-big-banner">
+        <h1 class="big-heading">Welcome to WarStorm - Fastest game news updates</h1>
+        <button class="call-to-action"><a href="../../News/news/news.html">Khám Phá Tin Tức</a></button>
+    </section>
+
+    <main id="main-content" class="container">
+        <div class="row">
+            <!-- Featured News -->
+            <section class="col-md-8 featured-news">
+                <ul class="list-of-latest-posts">
+                    <li>
+                        <a href="../../News/details/details1.html">
+                            <img src="../img/p1.webp" alt="Bài viết 1">
+                            <span>Bom tấn sinh tồn quá chất lượng bất ngờ giảm giá mạnh, thấp nhất trên Steam cho game thủ</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../../News/details/details2.html">
+                            <img src="../img/p2.webp" alt="Bài viết 2">
+                            <span>Trải nghiệm làm John Wick với I Am Your Beast - siêu phẩm hành động vừa ra mắt trên iOS</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../../News/details/details3.html">
+                            <img src="../img/z3.webp" alt="Bài viết 3">
+                            <span>Động thái mới của Doran trên stream đã tự chứng minh một lý do khiến Zeus rời T1</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../../News/details/details4.html">
+                            <img src="../img/34.webp" alt="Bài viết 4">
+                            <span>ĐTCL mùa 13: 3 đội hình được Riot "hồi sinh" mạnh mẽ, sắp làm trùm tại meta mới</span>
+                        </a>
+                    </li>
+                </ul>
+            </section>
+
+            <!-- Show Title -->
+            <div class="col-md-4">
+                <div class="show-title">
+                    <img src="../img/h1.jpg" alt="Ảnh thumbnail bài viết">
+                    <p class="short-description">Tựa game hot nhất tuần này với nhiều cập nhật mới.</p>
+                    <button class="see-more-btn"><a href="../../Hotgames/hotgame/hotgame.html">Xem Thêm</a></button>
+                </div>
+
+                <!-- Categories -->
+                <div class="categories">
+                    <h2>Danh mục Games - Tin tức</h2>
+                    <div class="content">
+                        <div class="game-list">
+                            <a href="../../Mobilegame/mobilegames/lienquan.html" class="game-card">Liên Quân Mobile</a>
+                            <a href="../../Mobilegame/mobilegames/genshin.html" class="game-card">Genshin Impact</a>
+                            <a href="../../Mobilegame/mobilegames/pubg.html" class="game-card">PUBG Mobile</a>
+                        </div>
+                        <div class="news-list">
+                            <a href="../../Mobilegame/newsmobilegames/newsmobile.html" class="news-card">
+                                <p>Cập nhật tin nóng về thế giới game!</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>              
+            </div>
+
+            <!-- Video Section -->
+            <div class="col-md-12">
+                <div class="video-stream text-center">
+                    <video id="myVideo" controls loop muted playsinline>
+                        <source src="../video/n1_fixed.mp4" type="video/mp4">
+                    </video>
+                    <audio id="myAudio" loop>
+                        <source src="../audio/t1.mp3" type="audio/mp3">
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar -->
+        <div class="row mt-4">
+            <div class="col-md-4 text-center">
+                <a href="../../Sidebar/AboutUS/about us/aboutus.html">
+                    <h2 class="about-us">Về chúng tôi</h2>
+                    <img src="../img/m1.jpg" alt="Về Chúng tôi" class="sidebar-img">
+                </a>
+            </div>
+        
+            <div class="col-md-4 text-center">
+                <a href="../../Sidebar/Gameranking/gamerankings/gameranking.html">
+                    <h2 class="game-rankings">Bảng xếp hạng game</h2>
+                    <img src="../img/u1.png" alt="Bảng xếp hạng game" class="sidebar-img">
+                </a>
+            </div>
+        
+            <div class="col-md-4 text-center">
+                <a href="../../Sidebar/Eventad/eventsad/eventsad.html">
+                    <h2 class="events-ad">Sự kiện quảng cáo</h2>
+                    <img src="../img/u2.png" alt="Sự kiện quảng cáo" class="sidebar-img">
+                </a>
+            </div>
+        </div>        
+    </main>                    
+
+    <button class="back-to-top" id="backToTop">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <div id="footer" class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4 class="information">Thông tin về WarStorm</h4>
+                <p><strong>Giới thiệu:</strong> WarStorm là một nền tảng tin tức và cộng đồng dành cho game thủ, cung cấp thông tin mới nhất về trò chơi, bảng xếp hạng, và sự kiện game.</p>
+                <p><strong>Mục tiêu:</strong>Chúng tôi hướng tới việc trở thành trang web hàng đầu về tin tức game, giúp game thủ cập nhật thông tin nhanh chóng và chính xác.</p>
+                <p class="contact"><a href="../../Footer/contact.html">Liên hệ</a></p>
+            </div>
+
+            <div class="col-md-4">
+                <h4 class="social">Liên kết mạng xã hội:</h4>
+                <a href="https://www.facebook.com/WarStorm" target="_blank"><i class="ti-facebook"></i></a>
+                <a href="https://www.youtube.com/@WarStorm" target="_blank"><i class="ti-youtube"></i></a>
+                <a href="https://discord.gg/warstorm" target="_blank"><i class="fa-brands fa-discord"></i></a>
+            </div>
+
+            <div class="col-md-4">
+                <h3 class="policies-terms">
+                    <a href="../../Footer/privacy-policy.html">Chính sách bảo mật</a>
+                    <a href="../../Footer/terms-and-conditions.html">Điều khoản sử dụng</a>
+                </h3>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    // Thêm dữ liệu tìm kiếm cho các trang
+    const searchData = [
+        { title: "Tin tức Game", url: "../../News/news/news.html", type: "news" },
+        { title: "ESPORTS", url: "../../Esports/esports/esport.html", type: "esports" },
+        { title: "Cửa hàng Gaming Gear", url: "../../Store/store/store.html", type: "store" },
+        { title: "Liên hệ", url: "../../Footer/contact.html", type: "contact" },
+        { title: "Liên Quân Mobile", url: "../../Mobilegame/mobilegames/lienquan.html", type: "game" },
+        { title: "Genshin Impact", url: "../../Mobilegame/mobilegames/genshin.html", type: "game" },
+        { title: "PUBG Mobile", url: "../../Mobilegame/mobilegames/pubg.html", type: "game" }
+    ];
+
+    function searchGames() {
+        const keyword = document.getElementById("search-input").value.toLowerCase();
+        const searchBox = document.querySelector('.search-box');
+        
+        // Xóa kết quả cũ
+        const oldResults = document.querySelector('.search-results');
+        if (oldResults) oldResults.remove();
+        
+        // Tìm kiếm
+        const results = searchData.filter(item => 
+            item.title.toLowerCase().includes(keyword) ||
+            item.type.toLowerCase().includes(keyword)
+        );
+
+        // Tạo và hiển thị kết quả
+        const resultsDiv = document.createElement('div');
+        resultsDiv.className = 'search-results';
+        
+        if (results.length > 0) {
+            resultsDiv.innerHTML = results.map(result => `
+                <a href="${result.url}" class="search-result-item ${result.type}">
+                    <span class="result-title">${result.title}</span>
+                    <span class="result-type">${result.type}</span>
+                </a>
+            `).join('');
+        } else {
+            resultsDiv.innerHTML = '<div class="no-results">Không tìm thấy kết quả</div>';
+        }
+        
+        searchBox.appendChild(resultsDiv);
+    }
+
+    function toggleSearchBox() {
+        const searchBox = document.getElementById("search-box");
+        searchBox.classList.toggle("active");
+        
+        if (!searchBox.classList.contains('active')) {
+            document.getElementById("search-input").value = '';
+            const results = document.querySelector('.search-results');
+            if (results) results.remove();
+        }
+    }
+
+    function toggleMenu() {
+        const nav = document.querySelector(".nav");
+        nav?.classList.toggle("active");
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        // Video and Audio Setup
+        const video = document.getElementById("myVideo");
+        const audio = document.getElementById("myAudio");
+        
+        if (video && audio) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        video.play().catch(e => console.log("Video autoplay prevented"));
+                    } else {
+                        video.pause();
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            video.onplay = () => audio.play().catch(e => console.log("Audio autoplay prevented"));
+            video.onpause = () => audio.pause();
+            video.ontimeupdate = () => audio.currentTime = video.currentTime;
+            video.onvolumechange = () => {
+                audio.muted = video.muted;
+                audio.volume = video.volume;
+            };
+
+            observer.observe(video);
+        }
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        if (backToTop) {
+            window.addEventListener('scroll', function() {
+                backToTop.classList.toggle('visible', window.scrollY > 300);
+            });
+
+            backToTop.addEventListener('click', function() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+        // Update Auth Section
+        function updateAuthSection() {
+            const authSection = document.getElementById('auth-section');
+            if (!authSection) return;
+
+            try {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser && currentUser.username) {
+                    const userInitial = currentUser.username.charAt(0).toUpperCase();
+                    authSection.innerHTML = `
+                        <div class="user-info">
+                            <div class="user-avatar">${userInitial}</div>
+                            <span>${currentUser.username}</span>
+                            <button onclick="handleLogout()" class="logout-btn">
+                                <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    authSection.innerHTML = `
+                        <a href="../../Login-Register/Login/login.html" class="login-register-btn-header">
+                            <i class="fas fa-user"></i> Đăng nhập
+                        </a>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error updating auth section:', error);
+            }
+        }
+
+        // Logout Handler
+        window.handleLogout = function() {
+            try {
+                API.auth.logout();
+                updateAuthSection();
+                window.location.href = '../../Login-Register/Login/login.html';
+            } catch (error) {
+                console.error('Error during logout:', error);
+            }
+        };
+
+        // Initialize auth section
+        updateAuthSection();
+    });
+
+    // Loading Overlay
+    window.addEventListener('load', function() {
+        const loadingOverlay = document.getElementById('loading-overlay');
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'none';
+        }
+    });
+</script>
+</body>
+</html>

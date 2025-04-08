@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Streamer đỉnh cao phá đảo 7 game Soulslike với nhân vật level 1, không dính sát thương</title>
+    <link rel="icon" type="image/png" sizes="96x96" href="../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/FontEnd/Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/FontEnd/Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/FontEnd/Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="/FontEnd/Home/favicon/site.webmanifest">
+</head>
+<style>
+    body {
+        background: #121212;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 20px;
+        padding-top: 60px;
+    }
+    h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+    p {
+        text-align: justify;
+        line-height: 1.6;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #FF4C4C;
+        padding: 10px 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+        transition: color 0.3s ease;
+    }
+    nav a:hover {
+        color: #FFD700;
+    }
+    .main-content {
+        max-width: 1200px;
+        margin: 80px auto 20px;
+        padding: 20px;
+        background: #1e1e1e;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    }
+    img {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        display: block;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .time-display {
+        position: absolute;
+        top: 70px;
+        left: 20px;
+        font-size: 14px;
+        color: #B0B0B0;
+        background: #1e1e1e;
+        padding: 5px 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+</style>
+<body>
+    <nav>
+        <a href="../news/news.html">Quay Lại Tin Tức</a>
+    </nav>
+    <div class="time-display" id="time"></div>
+    <section class="main-content">
+        <h1>Xuất hiện streamer kỹ năng đạt "đỉnh cao đời người", phá đảo 7 game Soulslike chỉ với nhân vật level 1, nhận 0 damage</h1>
+        <h4>Thành tích của anh chàng streamer này gần như đã trở nên độc nhất vô nhị.</h4>
+        <h5>Các tựa game Soulslike luôn được biết tới như một trong những thử thách khó nhằn nhất với các game thủ cũng như streamer trên toàn thế giới.</h5>
+        <p>Phá đảo các tựa game này tuy khó, nhưng cũng chưa tới mức là không thể khi có rất nhiều lối xây dựng, mẹo hay thủ thuật có thể khỏa lấp phần nào kỹ năng của người chơi. Thế nhưng để có thể đạt được những thành tích như anh chàng streamer trong câu chuyện dưới đây thì chắc chắn là chuyện xưa nay hiếm.</p>
+        <img src="../img/7.1.webp" alt="">
+        <h3>Nhân vật chính trong câu chuyện lần này là streamer Souls dinossindgeil, hay còn được gọi với cái tên quen thuộc là Nico.</h3>
+        <p>Mới đây thôi, Nico đã khiến tất cả phải ngỡ ngàng trước thành tích vô tiền khoáng hậu của mình. Cụ thể, nam streamer này đã vượt qua mọi trò chơi Soulslike nổi tiếng với danh sách bao gồm 7 tựa game lần lượt là Dark Souls 1-3, Sekiro: Shadows Die Twice, Bloodborne, Elden Ring và Demons Souls mà không phải nhận bất kỳ sát thương nào từ tất cả các boss cũng như quái vật của những trò chơi kể trên.</p>
+        <img src="../img/7.webp" alt="">
+        <p>Quan trọng hơn, Nico còn thực hiện các trò chơi này một cách liền mạch. Nhân vật của anh chàng cũng không hề được tăng cấp độ, giữ nguyên ở level 1 trong mọi trò. Trò chơi cuối cùng mà Nico thực hiện là Dark Souls 3 và ngay khi đánh bại boss cuối Soul of Cinder của trò chơi, nam streamer đã không giấu nổi cảm xúc khi thành công trong thử thách cực hạn này - thứ đã tiêu hao hơn 2 năm trời của nam streamer.</p>
+        <img src="../img/7.2.webp" alt="">
+        <p>Quay trở lại năm 2022, Nico đã hoàn thành thử thách tương tự, tất nhiên là với sự trợ giúp của rất nhiều cấp độ và vật phẩm. Anh chàng streamer đã mất khoảng 120 ngày vào thời điểm đó. Còn giờ đây, kỹ năng của Nico dường như đã ở mức "đỉnh cao đời người" với các trò chơi Soulslike rồi.</p>   
+    </section>
+    <script>
+        function updateTime() {
+            const timeElement = document.getElementById("time");
+            const now = new Date();
+            const formattedTime = now.toLocaleString("vi-VN", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+            }).replace(',', '');
+        timeElement.textContent = "⌚" + formattedTime;
+        }
+        updateTime();
+    </script>       
+</body>
+</html>

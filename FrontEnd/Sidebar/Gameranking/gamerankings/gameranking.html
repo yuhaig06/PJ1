@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bảng Xếp Hạng Game</title>
+    <link rel="stylesheet" href="../../css/sidebar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../../Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../../Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../../Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../../Home/favicon/site.webmanifest">
+</head>
+<body>
+    <header id="header">
+        <a href="../../../Home/home/home.html" class="logo-link">
+            <img src="../../../Home/img/logo.png" alt="Logo WarStorm" class="logo">
+        </a>
+        <button id="menu-toggle">☰</button>
+        <nav id="mobile-menu">
+            <ul>
+                <li><a href="../../../Home/home/home.html">Trang chủ</a></li>
+                <li><a href="../../../News/news/news.html">Tin tức</a></li>
+                <li><a href="../../../Esports/esports/esport.html">ESPORTS</a></li>
+                <li><a href="../../../Store/store.html">Store</a></li>
+                <li><a href="../../../Footer/contact.html">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1><i class="fas fa-trophy"></i> Bảng Xếp Hạng Game</h1>
+        
+        <div class="search-container">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" class="search-input" placeholder="Tìm kiếm game..." id="searchInput">
+        </div>
+
+        <div class="filter-buttons">
+            <button class="filter-btn active" data-category="all">Tất cả</button>
+            <button class="filter-btn" data-category="moba">MOBA</button>
+            <button class="filter-btn" data-category="fps">FPS</button>
+            <button class="filter-btn" data-category="rpg">RPG</button>
+            <button class="filter-btn" data-category="strategy">Chiến thuật</button>
+        </div>
+
+        <ul class="game-list">
+            <li class="game-item card" data-category="moba">
+                <span class="rank">#1</span>
+                <img src="" data-src="../../img/lq.jpg" alt="Liên Quân Mobile" loading="lazy">
+                <div class="game-info">
+                    <h2>Liên Quân Mobile</h2>
+                    <p>Tựa game MOBA hàng đầu với lối chơi chiến thuật và cộng đồng đông đảo.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-users"></i> 10M+ người chơi</span>
+                        <span><i class="fas fa-star"></i> 4.8/5</span>
+                    </div>
+                </div>
+            </li>
+            <li class="game-item card" data-category="fps">
+                <span class="rank">#2</span>
+                <img src="" data-src="../../img/pm.jpg" alt="PUBG Mobile" loading="lazy">
+                <div class="game-info">
+                    <h2>PUBG Mobile</h2>
+                    <p>Trò chơi bắn súng sinh tồn nổi tiếng với đồ họa chân thực và gameplay hấp dẫn.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-users"></i> 8M+ người chơi</span>
+                        <span><i class="fas fa-star"></i> 4.7/5</span>
+                    </div>
+                </div>
+            </li>
+            <li class="game-item card" data-category="fps">
+                <span class="rank">#3</span>
+                <img src="" data-src="../../img/ff.jpg" alt="Free Fire" loading="lazy">
+                <div class="game-info">
+                    <h2>Free Fire</h2>
+                    <p>Game bắn súng sinh tồn với lối chơi nhanh, phù hợp với nhiều cấu hình máy.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-users"></i> 7M+ người chơi</span>
+                        <span><i class="fas fa-star"></i> 4.6/5</span>
+                    </div>
+                </div>
+            </li>
+            <li class="game-item card" data-category="rpg">
+                <span class="rank">#4</span>
+                <img src="" data-src="../../img/gi.jpg" alt="Genshin Impact" loading="lazy">
+                <div class="game-info">
+                    <h2>Genshin Impact</h2>
+                    <p>Tựa game nhập vai thế giới mở với đồ họa tuyệt đẹp và cốt truyện sâu sắc.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-users"></i> 6M+ người chơi</span>
+                        <span><i class="fas fa-star"></i> 4.9/5</span>
+                    </div>
+                </div>
+            </li>
+            <li class="game-item card" data-category="fps">
+                <span class="rank">#5</span>
+                <img src="" data-src="../../img/cd.jpg" alt="Call of Duty" loading="lazy">
+                <div class="game-info">
+                    <h2>Call of Duty</h2>
+                    <p>Phiên bản di động của series bắn súng huyền thoại, mang đến trải nghiệm FPS chất lượng cao.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-users"></i> 5M+ người chơi</span>
+                        <span><i class="fas fa-star"></i> 4.5/5</span>
+                    </div>
+                </div>
+            </li>
+            <li class="game-item card" data-category="rpg">
+                <span class="rank">#6</span>
+                <img src="" data-src="../../img/pg.jpg" alt="Pokémon Go" loading="lazy">
+                <div class="game-info">
+                    <h2>Pokémon Go</h2>
+                    <p>Trò chơi thực tế ảo tăng cường, cho phép người chơi bắt Pokémon trong thế giới thực.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-users"></i> 4M+ người chơi</span>
+                        <span><i class="fas fa-star"></i> 4.4/5</span>
+                    </div>
+                </div>
+            </li>
+            <li class="game-item card" data-category="strategy">
+                <span class="rank">#7</span>
+                <img src="" data-src="../../img/ll.webp" alt="Đấu Trường Chân Lý Mobile" loading="lazy">
+                <div class="game-info">
+                    <h2>Đấu Trường Chân Lý Mobile</h2>
+                    <p>Phiên bản di động của game cờ nhân phẩm nổi tiếng từ Liên Minh Huyền Thoại.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-users"></i> 3M+ người chơi</span>
+                        <span><i class="fas fa-star"></i> 4.3/5</span>
+                    </div>
+                </div>
+            </li>
+            <li class="game-item card" data-category="moba">
+                <span class="rank">#8</span>
+                <img src="" data-src="../../img/ll1.jpg" alt="LMHT: Tốc Chiến" loading="lazy">
+                <div class="game-info">
+                    <h2>LMHT: Tốc Chiến</h2>
+                    <p>Phiên bản mobile của Liên Minh Huyền Thoại, mang đến trải nghiệm MOBA đỉnh cao trên di động.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-users"></i> 3M+ người chơi</span>
+                        <span><i class="fas fa-star"></i> 4.2/5</span>
+                    </div>
+                </div>
+            </li>
+            <li class="game-item card" data-category="rpg">
+                <span class="rank">#9</span>
+                <img src="" data-src="../../img/dr.jpg" alt="Dragon Raja" loading="lazy">
+                <div class="game-info">
+                    <h2>Dragon Raja</h2>
+                    <p>Game nhập vai với đồ họa ấn tượng và thế giới mở rộng lớn.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-users"></i> 2M+ người chơi</span>
+                        <span><i class="fas fa-star"></i> 4.1/5</span>
+                    </div>
+                </div>
+            </li>
+            <li class="game-item card" data-category="strategy">
+                <span class="rank">#10</span>
+                <img src="" data-src="../../img/rk.jpg" alt="Rise of Kingdoms" loading="lazy">
+                <div class="game-info">
+                    <h2>Rise of Kingdoms</h2>
+                    <p>Trò chơi chiến thuật xây dựng đế chế với lối chơi đa dạng và cộng đồng lớn mạnh.</p>
+                    <div class="game-stats">
+                        <span><i class="fas fa-users"></i> 2M+ người chơi</span>
+                        <span><i class="fas fa-star"></i> 4.0/5</span>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <button class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <footer class="container">
+        <p>&copy; 2025 WarStorm. All rights reserved.</p>
+        <a href="../../../Footer/privacy-policy.html">Chính sách bảo mật</a>
+        <a href="../../../Footer/terms-and-conditions.html">Điều khoản sử dụng</a>
+        <a href="../../../Footer/contact.html">Liên hệ</a>
+    </footer>
+
+    <script>
+        // Mobile Menu
+        document.addEventListener("DOMContentLoaded", function() {
+            const menuToggle = document.getElementById("menu-toggle");
+            const mobileMenu = document.getElementById("mobile-menu");
+
+            menuToggle.addEventListener("click", function() {
+                mobileMenu.classList.toggle("active");
+            });
+
+            document.addEventListener("click", function(event) {
+                if (!menuToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+                    mobileMenu.classList.remove("active");
+                }
+            });
+        });
+
+        // Dark Mode Toggle
+        const darkModeToggle = document.getElementById("darkModeToggle");
+        const body = document.body;
+
+        // Check for saved dark mode preference
+        if (localStorage.getItem("darkMode") === "enabled") {
+            body.setAttribute("data-theme", "dark");
+            darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        darkModeToggle.addEventListener("click", function() {
+            if (body.getAttribute("data-theme") === "dark") {
+                body.removeAttribute("data-theme");
+                localStorage.setItem("darkMode", "disabled");
+                this.innerHTML = '<i class="fas fa-moon"></i>';
+            } else {
+                body.setAttribute("data-theme", "dark");
+                localStorage.setItem("darkMode", "enabled");
+                this.innerHTML = '<i class="fas fa-sun"></i>';
+            }
+        });
+
+        // Search Functionality
+        const searchInput = document.getElementById("searchInput");
+        const gameItems = document.querySelectorAll(".game-item");
+
+        searchInput.addEventListener("input", function() {
+            const searchTerm = this.value.toLowerCase();
+            
+            gameItems.forEach(item => {
+                const title = item.querySelector("h2").textContent.toLowerCase();
+                const description = item.querySelector("p").textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    item.style.display = "flex";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+
+        // Filter Functionality
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        
+        filterButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove("active"));
+                // Add active class to clicked button
+                this.classList.add("active");
+                
+                const category = this.getAttribute("data-category");
+                
+                gameItems.forEach(item => {
+                    if (category === "all" || item.getAttribute("data-category") === category) {
+                        item.style.display = "flex";
+                    } else {
+                        item.style.display = "none";
+                    }
+                });
+            });
+        });
+
+        // Lazy Loading Images
+        const images = document.querySelectorAll("img[loading='lazy']");
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.getAttribute("data-src");
+                    img.removeAttribute("loading");
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        images.forEach(img => imageObserver.observe(img));
+    </script>
+</body>
+</html>

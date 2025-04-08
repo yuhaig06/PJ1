@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game thủ phát hiện bằng chứng mạnh mẽ về sự ra mắt của Half-Life 3!</title>
+    <link rel="icon" type="image/png" sizes="96x96" href="../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../Home/favicon/site.webmanifest">
+</head>
+<style>
+    body {
+        background: #121212;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 20px;
+        padding-top: 60px;
+    }
+    h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+    p {
+        text-align: justify;
+        line-height: 1.6;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #FF4C4C;
+        padding: 10px 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+        transition: color 0.3s ease;
+    }
+    nav a:hover {
+        color: #FFD700;
+    }
+    .main-content {
+        max-width: 1200px;
+        margin: 80px auto 20px;
+        padding: 20px;
+        background: #1e1e1e;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    }
+    img {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        display: block;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .time-display {
+        position: absolute;
+        top: 70px;
+        left: 20px;
+        font-size: 14px;
+        color: #B0B0B0;
+        background: #1e1e1e;
+        padding: 5px 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+</style>
+<body>
+    <nav>
+        <a href="../news/news.html">Quay Lại Tin Tức</a>
+    </nav>
+    <div class="time-display" id="time"></div>
+    <section class="main-content">
+        <h1>Half-Life 3 chuẩn bị ra mắt, game thủ tìm thấy chứng cứ cực kỳ thuyết phục</h1>
+        <h4>Nếu thông tin này là thật, chắc chắn nhiều game thủ sẽ cảm thấy vui mừng hơn bao giờ hết.</h4>
+        <h5>Half-Life 3 từ lâu đã luôn là một trong những tựa game được nhiều người chơi chờ đợi bậc nhất.</h5>
+        <p>Vì lẽ đơn giản, Half-Life đã trở thành series có lượng fan hâm mộ khổng lồ và cũng đã quá lâu rồi, Valve chưa có bất kỳ động thái nào cho thấy muốn hồi sinh series này. Rất nhiều đồn đoán đã nổ ra, nhưng phần lớn đều không thực tế và bản thân nhà phát triển vẫn chỉ duy trì sự im lặng. Thế nhưng rất có thể, mọi thứ sẽ thay đổi trong thời gian sắp tới.</p>
+        <img src="../img/13.1.webp" alt="">
+        <h3>Cụ thể, một số game thủ và các fan hâm mộ của Half-Life đã nhận thấy một trò chơi chưa được Valve công bố trên Steam, thậm chí còn có cả máy chủ nhiều người chơi đi kèm.</h3>
+        <p>Nhiều người cho rằng đây rất có khả năng là "HLX" - tựa game được cho là Half-Life 3, phần tiếp theo không phải VR của Alyx và Episode Two. Tuy nhiên, liệu danh sách trên SteamDB này có thực sự là HLX hay không vẫn chưa rõ ràng và về cơ bản, tựa game mới này vẫn đang nằm trong vòng bí mật. Nhưng nếu nó liên quan đến Half-Life, thì yếu tố nhiều người chơi là một chi tiết mới thú vị.</p>
+        <img src="../img/13.webp" alt="">
+        <p>Một tựa game Half-Life với máy chủ nhiều người chơi có thể không phải là điều mà các fan mong đợi. Thế nhưng nên nhớ rằng, Half-Life 3 có thể sẽ sở hữu chế độ Deathmatch của riêng mình. Điều này cũng góp phần giải thích cho việc một máy chủ nhiều người chơi tồn tại. Thế nhưng như đã đề cập ở trên, việc đây có phải là Half-Life 3 hay không vẫn là giả thuyết khá mong manh.</p>
+        <img src="../img/13.2.webp" alt="">
+        <p>Có thể Valve sẽ hồi sinh series Half-Life, có thể không nhất là trong bối cảnh Deadlock - trò chơi rất được kỳ vọng của nhà phát triển này thậm chí còn chưa ra mắt.</p>
+    </section>
+    <script>
+        function updateTime() {
+            const timeElement = document.getElementById("time");
+            const now = new Date();
+            const formattedTime = now.toLocaleString("vi-VN", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+            }).replace(',', '');
+        timeElement.textContent = "⌚" + formattedTime;
+        }
+        updateTime();
+    </script>       
+</body>
+</html>
