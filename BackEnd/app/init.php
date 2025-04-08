@@ -1,11 +1,28 @@
 <?php
+use App\Core\App;
 
-// Load cấu hình
-require_once __DIR__ . '/config/config.php';
+// Error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Load App Core
-require_once __DIR__ . '/core/App.php';
-require_once __DIR__ . '/core/Controller.php';
+// Define base path
+define('BASE_PATH', dirname(__DIR__));
 
-// Khởi tạo App
-$app = new App();
+// Check composer autoloader
+$autoloadFile = BASE_PATH . '/vendor/autoload.php';
+if (!file_exists($autoloadFile)) {
+    die('Please run "composer install" in the project root directory');
+}
+
+require_once $autoloadFile;
+require_once BASE_PATH . '/app/config/config.php';
+
+try {
+    $app = new App();
+    $app->run(); // Thêm method run() để xử lý request
+} catch (Exception $e) {
+    echo json_encode([
+        'status' => 'error',
+        'message' => $e->getMessage()
+    ]);
+}

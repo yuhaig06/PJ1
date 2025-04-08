@@ -6,95 +6,70 @@ use App\Models\UserModel;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use App\Config\Database;
+use App\Core\Request;
 
 class AuthMiddleware {
-    private $db;
-    private $userModel;
+    private \PDO $db;
+    private UserModel $userModel;
+    private string $secret;
 
     public function __construct() {
-        $this->db = Database::getInstance()->getConnection(); // Đảm bảo Database trả về kết nối PDO
-        $this->userModel = new UserModel($this->db); // Sử dụng UserModel với kết nối DB
+        $this->db = Database::getInstance()->getConnection();
+        $this->userModel = new UserModel($this->db);
+        $this->secret = $_ENV['JWT_SECRET'] ?? 'default_secret';
     }
 
-    public function handle($request, $next) {
+    /**
+     * @param Request $request
+     * @param callable $next
+     * @return mixed
+     * @throws \Exception
+     */
+    public function handle(Request $request, callable $next) {
         $token = $request->header('Authorization');
         
         if (!$token) {
-            return json_encode([
-                'error' => 'Unauthorized',
-                'message' => 'No token provided'
-            ], JSON_PRETTY_PRINT);
+            return json_encode(['error' => 'Không có token']);
         }
         
         try {
             $token = str_replace('Bearer ', '', $token);
-            $decoded = JWT::decode($token, new Key($_ENV['JWT_SECRET'] ?? 'default_secret', 'HS256')); // Thêm giá trị mặc định nếu JWT_SECRET không tồn tại
+            $decoded = json_decode(base64_decode($token));
             
-            $user = $this->userModel->findById($decoded->sub); // Đảm bảo findById tồn tại trong UserModel
-            if (!$user) {
-                throw new \Exception('User not found');
+            if (!isset($decoded->sub) || !is_numeric($decoded->sub)) {
+                return json_encode(['error' => 'ID không hợp lệ']);
             }
             
-            $request->user = $user;
+            $user = $this->userModel->findById((int)$decoded->sub);
+            if (!$user) {
+                return json_encode(['error' => 'User không tồn tại']);
+            }
+            
+            $request->setUser($user);
             return $next($request);
         } catch (\Exception $e) {
-            return json_encode([
-                'error' => 'Unauthorized',
-                'message' => 'Invalid token'
-            ], JSON_PRETTY_PRINT);
+            return json_encode(['error' => 'Token không hợp lệ']);
         }
     }
+
+    private function errorResponse(string $message): string {
+        return json_encode([
+            'error' => 'Unauthorized',
+            'message' => $message
+        ]);
+    }
     
-    public static function generateToken($user) {
+    /**
+     * @param array<string, mixed> $user
+     * @return string
+     */
+    public static function generateToken(array $user): string {
         $payload = [
-            'sub' => $user['id'], // Đảm bảo user là mảng và có key 'id'
-            'name' => $user['username'],
-            'email' => $user['email'],
-            'iat' => time(),
-            'exp' => time() + (60 * 60 * 24) // 24 hours
+            'sub' => $user['id'],
+            'role' => $user['role'],
+            'exp' => time() + (60 * 60 * 24)
         ];
         
-        return JWT::encode($payload, $_ENV['JWT_SECRET'] ?? 'default_secret', 'HS256'); // Thêm giá trị mặc định nếu JWT_SECRET không tồn tại
-    }
-    
-    public static function validatePassword($password, $hash) {
-        return password_verify($password, $hash);
-    }
-    
-    public static function hashPassword($password) {
-        return password_hash($password, PASSWORD_DEFAULT);
-    }
-
-    public function isAdmin() {
-        $user = $this->userModel->findById($_SESSION['user_id']);
-        return $user && $user['role'] === 'admin';
-    }
-
-    public function isModerator() {
-        $user = $this->userModel->findById($_SESSION['user_id']);
-        return $user && in_array($user['role'], ['admin', 'moderator']);
-    }
-
-    public function checkPermission($permission) {
-        $user = $this->userModel->findById($_SESSION['user_id']);
-        return $user && $this->userModel->hasPermission($user['id'], $permission);
-    }
-
-    public static function isGuest() {
-        if (isset($_SESSION['user_id'])) {
-            header('Location: /');
-            exit;
-        }
-    }
-
-    public static function hasRole($role) {
-        if ($_SESSION['user_role'] !== $role) {
-            header('Location: /');
-            exit;
-        }
-    }
-
-    public static function isUser() {
-        self::hasRole('user');
+        return base64_encode(json_encode($payload));
     }
 }

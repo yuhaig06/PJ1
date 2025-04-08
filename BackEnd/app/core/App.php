@@ -1,109 +1,184 @@
 <?php
+namespace App\Core;
+
+use App\Routes\Router;
 
 class App {
     protected $controller = 'HomeController';
     protected $method = 'index';
     protected $params = [];
-    protected $accessControl = [
-        'UserController' => [
-            'login' => ['public'],
-            'register' => ['public'],
-            'logout' => ['user', 'admin']
-        ],
-        'AdminController' => [
-            'index' => ['admin'],
-            'users' => ['admin'],
-            'settings' => ['admin']
-        ]
+    protected $currentController = null;
+    protected $routes = [
+        'public' => ['home', 'login', 'register'],
+        'protected' => ['profile', 'store', 'cart']
     ];
 
     public function __construct() {
-        $url = $this->parseUrl();
-        
-        // Kiểm tra và load controller
-        if (isset($url[0])) {
-            $controllerName = ucfirst(strtolower($url[0])) . 'Controller';
-            $controllerPath = dirname(__DIR__) . '/controllers/' . $controllerName . '.php';
-
-            if (file_exists($controllerPath)) {
-                $this->controller = $controllerName;
-                unset($url[0]);
-            } else {
-                $this->handleError('Controller không tồn tại');
-            }
-        }
-
-        // Load controller
-        require_once dirname(__DIR__) . '/controllers/' . $this->controller . '.php';
-        $this->controller = new $this->controller();
-
-        // Kiểm tra và load method
-        if (isset($url[1])) {
-            if (method_exists($this->controller, $url[1])) {
-                $this->method = $url[1];
-                unset($url[1]);
-            } else {
-                $this->handleError('Method không tồn tại');
-            }
-        }
-
-        // Kiểm tra quyền truy cập
-        if (!$this->checkAccess()) {
-            $this->handleError('Bạn không có quyền truy cập trang này');
-        }
-
-        // Set params
-        $this->params = $url ? array_values($url) : [];
-
-        // Gọi method với params
         try {
-            call_user_func_array([$this->controller, $this->method], $this->params);
-        } catch (Exception $e) {
-            $this->handleError($e->getMessage());
+            $url = $this->parseUrl();
+            
+            // Kiểm tra xem URL có tồn tại không
+            if ($url !== false && is_array($url)) {
+                // Handle API routes
+                if ($url[0] === 'api') {
+                    $this->handleApiRequest($url);
+                    return;
+                }
+
+                // Get controller name from URL
+                $controllerName = isset($url[0]) ? ucfirst($url[0]) . 'Controller' : $this->controller;
+                $controllerClass = "App\\Controllers\\" . $controllerName;
+                
+                // Check access before initializing controller
+                if (!$this->checkAccess($controllerName)) {
+                    header('Location: /login');
+                    exit;
+                }
+
+                // Initialize controller
+                if (class_exists($controllerClass)) {
+                    $this->currentController = new $controllerClass();
+                    $this->controller = $controllerName;
+                    unset($url[0]);
+                } else {
+                    throw new \Exception("Controller not found: $controllerClass");
+                }
+
+                // Set method
+                if (isset($url[1])) {
+                    if (method_exists($this->currentController, $url[1])) {
+                        $this->method = $url[1];
+                        unset($url[1]);
+                    }
+                }
+
+                // Set params
+                $this->params = $url ? array_values($url) : [];
+
+                // Call controller method with parameters
+                call_user_func_array([$this->currentController, $this->method], $this->params);
+            }
+
+        } catch (\Exception $e) {
+            $this->sendJsonResponse([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
-    private function parseUrl() {
+    protected function handleApiRequest($url) {
+        array_shift($url); // Remove 'api' from url
+        $module = $url[0] ?? null;
+        $action = $url[1] ?? 'list';
+        
+        $routes = Router::getRoutes();
+        
+        if (!isset($routes[$module])) {
+            $this->sendJsonResponse([
+                'status' => 'error',
+                'message' => 'Module not found'
+            ], 404);
+            return;
+        }
+
+        $route = $routes[$module][$action] ?? null;
+        if (!$route) {
+            $this->sendJsonResponse([
+                'status' => 'error',
+                'message' => 'Route not found'
+            ], 404);
+            return;
+        }
+
+        [$controller, $method, $httpMethod] = $route;
+        
+        if ($_SERVER['REQUEST_METHOD'] !== $httpMethod) {
+            $this->sendJsonResponse([
+                'status' => 'error',
+                'message' => 'Method not allowed'
+            ], 405);
+            return;
+        }
+
+        $controllerClass = "App\\Controllers\\{$controller}";
+        $controller = new $controllerClass();
+        $response = $controller->$method($url);
+        
+        $this->sendJsonResponse($response);
+    }
+
+    protected function sendJsonResponse($data, $statusCode = 200) {
+        http_response_code($statusCode);
+        header('Content-Type: application/json');
+        echo json_encode($data, JSON_PRETTY_PRINT);
+        exit;
+    }
+
+    protected function parseUrl() {
         if (isset($_GET['url'])) {
-            // Sanitize URL
-            $url = filter_var(rtrim($_GET['url'], '/'), FILTER_SANITIZE_URL);
-            // Chỉ cho phép chữ cái, số và dấu gạch ngang
-            $url = preg_replace('/[^a-zA-Z0-9-]/', '', $url);
+            $url = rtrim($_GET['url'], '/');
+            $url = filter_var($url, FILTER_SANITIZE_URL);
             return explode('/', $url);
         }
-        return [];
+        return false;
     }
 
-    private function checkAccess() {
-        // Kiểm tra nếu controller và method có trong accessControl
-        if (isset($this->accessControl[$this->controller][$this->method])) {
-            $allowedRoles = $this->accessControl[$this->controller][$this->method];
-            
-            // Nếu là public thì cho phép truy cập
-            if (in_array('public', $allowedRoles)) {
-                return true;
-            }
-            
-            // Kiểm tra user đã đăng nhập chưa
-            if (!isset($_SESSION['user_id'])) {
-                return false;
-            }
-            
-            // Kiểm tra role của user
-            $userRole = $_SESSION['user_role'] ?? 'user';
-            return in_array($userRole, $allowedRoles);
+    protected function checkAccess($controllerName) {
+        // Extract base name without 'Controller' suffix
+        $routeName = strtolower(str_replace('Controller', '', $controllerName));
+
+        // Public routes are always accessible
+        if (in_array($routeName, $this->routes['public'])) {
+            return true;
         }
-        
-        // Nếu không có quy định thì mặc định cho phép truy cập
+
+        // Protected routes require authentication
+        if (in_array($routeName, $this->routes['protected'])) {
+            return isset($_SESSION['user_id']);
+        }
+
+        // Default to true for unspecified routes
         return true;
     }
 
-    private function handleError($message) {
-        // Log lỗi
-        error_log($message);
-        
-        // Chuyển hướng đến trang lỗi
-        header('Location: ' . URLROOT . '/error/index');
+    protected function handleError(\Exception $e) {
+        // Log error
+        error_log($e->getMessage());
+
+        // Send appropriate response
+        header('Content-Type: application/json');
+        http_response_code(500);
+        echo json_encode([
+            'error' => true,
+            'message' => 'Internal Server Error',
+            'details' => $e->getMessage()
+        ]);
         exit;
+    }
+
+    public function run() {
+        try {
+            // Thêm headers cho API
+            header('Content-Type: application/json');
+            header('Access-Control-Allow-Origin: *');
+            header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
+            
+            // Xử lý request và trả về response
+            $response = [
+                'status' => 'success',
+                'message' => 'Welcome to WarStorm API',
+                'timestamp' => date('Y-m-d H:i:s'),
+                'version' => '1.0.0'
+            ];
+
+            echo json_encode($response, JSON_PRETTY_PRINT);
+        } catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'status' => 'error',
+                'message' => $e->getMessage()
+            ]);
+        }
     }
 }

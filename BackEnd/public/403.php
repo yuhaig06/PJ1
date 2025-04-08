@@ -66,10 +66,10 @@
         <p>Xin lỗi, bạn không có quyền truy cập vào trang này. Vui lòng liên hệ admin nếu bạn nghĩ đây là lỗi.</p>
         
         <div class="img-container">
-            <img src="assets/img/icon403.png" alt="403 Image">
+            <img src="assets/img/iconerror.png" alt="403 Image">
         </div>
 
-        <a href="/PJ1/" class="btn btn-primary mt-3">Quay lại trang chủ</a>
+        <a href="../../FrontEnd/Home/home/home.html" class="btn btn-primary mt-3">Quay lại trang chủ</a>
     </div>
 </body>
 </html> 

@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Core\Model;
-use App\Core\Database;
+use PDO;
 
 class NewsModel extends Model
 {
@@ -43,9 +43,8 @@ class NewsModel extends Model
             $params[] = $offset;
         }
 
-        $stmt = $this->db->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->fetchAll();
+        $stmt = $this->query($sql, $params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     /**
@@ -285,6 +284,67 @@ class NewsModel extends Model
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$newsId, $newsId, $limit]);
         return $stmt->fetchAll();
+    }
+
+    public function getAll($page = 1, $limit = 10, $filters = []) {
+        $offset = ($page - 1) * $limit;
+        
+        $sql = "SELECT n.*, u.username as author_name, nc.name as category_name 
+                FROM news n 
+                JOIN users u ON n.author_id = u.id 
+                JOIN news_categories nc ON n.category_id = nc.id 
+                WHERE 1=1";
+                
+        $params = [];
+
+        // Add filters
+        if (!empty($filters['category_id'])) {
+            $sql .= " AND n.category_id = ?";
+            $params[] = $filters['category_id'];
+        }
+
+        if (!empty($filters['status'])) {
+            $sql .= " AND n.status = ?";
+            $params[] = $filters['status'];
+        }
+
+        if (!empty($filters['author_id'])) {
+            $sql .= " AND n.author_id = ?";
+            $params[] = $filters['author_id'];
+        }
+
+        // Add sorting
+        $sql .= " ORDER BY n.published_at DESC LIMIT ? OFFSET ?";
+        $params[] = $limit;
+        $params[] = $offset;
+
+        $stmt = $this->query($sql, $params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getTotal($filters = []) {
+        $sql = "SELECT COUNT(*) as total FROM news WHERE 1=1";
+        $params = [];
+
+        // Add same filters as getAll
+        if (!empty($filters['category_id'])) {
+            $sql .= " AND category_id = ?";
+            $params[] = $filters['category_id'];
+        }
+
+        if (!empty($filters['status'])) {
+            $sql .= " AND status = ?";
+            $params[] = $filters['status'];
+        }
+
+        if (!empty($filters['author_id'])) {
+            $sql .= " AND author_id = ?";
+            $params[] = $filters['author_id'];
+        }
+
+        $stmt = $this->query($sql, $params);
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['total'];
     }
 }
 ?>
