@@ -1,0 +1,28 @@
+[06-Apr-2025 11:58:48 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\init.php(11): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[06-Apr-2025 11:58:51 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\init.php(11): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[06-Apr-2025 11:58:55 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\app\init.php(11): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
+[06-Apr-2025 11:59:21 Asia/Ho_Chi_Minh] PHP Fatal error:  Uncaught Error: Class "App\Core\Model" not found in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php:8
+Stack trace:
+#0 D:\xampp\htdocs\PJ1\BackEnd\app\controllers\HomeController.php(3): require_once()
+#1 D:\xampp\htdocs\PJ1\BackEnd\app\core\App.php(37): require_once('D:\\xampp\\htdocs...')
+#2 D:\xampp\htdocs\PJ1\BackEnd\public\index.php(31): App->__construct()
+#3 {main}
+  thrown in D:\xampp\htdocs\PJ1\BackEnd\app\models\NewsModel.php on line 8
