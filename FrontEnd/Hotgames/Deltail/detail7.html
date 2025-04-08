@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini World Royale - Sản phẩm bắn súng sinh tồn vui nhộn với đồ họa cực dễ thương</title>
+    <link rel="icon" type="image/png" sizes="96x96" href="../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../Home/favicon/site.webmanifest">
+</head>
+<style>
+    body {
+        background: #121212;
+        color: white;
+        font-family: 'Roboto', sans-serif;
+        margin: 0;
+        padding: 20px;
+        padding-top: 60px;
+    }
+    h1 {
+        font-size: 24px;
+        text-align: center;
+    }
+    p {
+        text-align: justify;
+        line-height: 1.6;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: #FF4C4C;
+        padding: 10px 20px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+    }
+    nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: bold;
+        margin-right: 10px;
+        transition: color 0.3s ease;
+    }
+    nav a:hover {
+        color: #FFD700;
+    }
+    .main-content {
+        max-width: 1200px;
+        margin: 80px auto 20px;
+        padding: 20px;
+        background: #1e1e1e;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+    }
+    img {
+        width: 100%;
+        max-width: 900px;
+        margin: 0 auto;
+        display: block;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    .time-display {
+        position: absolute;
+        top: 70px;
+        left: 20px;
+        font-size: 14px;
+        color: #B0B0B0;
+        background: #1e1e1e;
+        padding: 5px 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
+</style>
+<body>
+    <nav>
+        <a href="../hotgame/hotgame.html">Quay Lại Tin Games</a>
+    </nav>
+    <div class="time-display" id="time"></div>
+    <section class="main-content">
+        <h1>Mini World Royale - Sản phẩm bắn súng sinh tồn vui nhộn với đồ họa cực dễ thương</h1>
+        <h4>Mới đây một sản phẩm game bắn súng sinh tồn đã xuất hiện trên mobile với lối chơi và nền đồ họa thú vị, hấp dẫn và giải trí</h4>
+        <p>Nếu như bạn là một người chơi yêu thích lối chơi của Avatar Star với nền đồ họa vui nhộn cùng phong cách chiến đấu thú vị thì một trò chơi mới đây chắc chắn sẽ khiến bạn cảm thấy hào hứng. Mà cụ thể thì trò chơi này có tên là Mini World Royale 2025.</p>
+        <img src="../img/g1.webp" alt="">
+        <p>Mini World Royale 2025 được giới thiệu là một trò chơi bắn súng nhiều người chơi với lối chơi thú vị. Sản phẩm này là một sự kết hợp của nhiều yếu tố gameplay từ nhiều trò chơi nổi tiếng với nhau. Kết hợp nhiều là thế nhưng lối chơi của Mini World Royale 2025 lại vô cùng đơn giản, vui nhộn và bất kì game thủ nào cũng có thể trải nghiệm được dễ dàng.</p>
+        <img src="../img/g2.jpg" alt="">
+        <img src="../img/g3.jpg" alt="">
+        <p>Với những gì mà bản thân đang thể hiện thì Mini World Royale 2025 không hề kén người chơi với 5 chế độ chơi khác nhau, kèm theo đó là 30 bản đồ độc đáo giúp trò chơi không hề tạo cảm giác nhàm chán. Chưa kể Mini World Royale 2025 còn xây dựng cho mình một kho vũ khí đồ sộ, dàn nhân vật độc đáo và mỗi người chơi đều có thể tùy thích điều chỉnh nhân vật của mình.</p>
+        <p>Gameplay của Mini World Royale 2025 được đánh giá là tương đối nhanh, với nhịp độ giao tranh liên tục nên rất thích hợp với những người bận rộn, không có đủ thời gian để cày cuốc liên tục.</p>
+        <img src="../img/g4.webp" alt="">
+        <p>Hiện tại Mini World Royale 2025 đang được phát hành trên cả 2 hệ thống CH Play và Appstore, do đó nếu bạn muốn có những trải nghiệm hấp dẫn, vui nhộn như một cách giải trí thì đây chắc chắn là một lựa chọn không hề tệ.</p>
+    </section>
+    <script>
+        function updateTime() {
+            const timeElement = document.getElementById("time");
+            const now = new Date();
+            const formattedTime = now.toLocaleString("vi-VN", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric",
+                hour: "2-digit",
+                minute: "2-digit",
+                hour12: true
+            }).replace(',', '');
+        timeElement.textContent = "⌚" + formattedTime;
+        }
+        updateTime();
+    </script>
+</body>
+</html>

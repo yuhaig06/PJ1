@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Genshin Impact</title>
+    <link rel="stylesheet" href="../../Home/fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../Home/favicon/site.webmanifest">
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #121212;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    padding-top: 60px;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.nav-links {
+    display: flex;
+}
+
+@media (min-width: 769px) {
+    .nav-links {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #FF4C4C;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 200px;
+        padding: 10px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #FF4C4C;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #FFD700;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 80px auto 20px;
+    padding: 20px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.main-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+}
+
+p {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+img {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 1;
+}
+.download {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-download {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 15px;
+    background: #ff5733;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-download:hover {
+    background: #d43f00;
+}
+</style>
+<body>
+    <nav>
+        <a href="../../Home/home/home.html">Quay Lại Trang Chủ</a>
+        <div class="menu-toggle">☰</div>
+        <div class="nav-links">
+            <a href="../../Home/home/home.html">Trang chủ</a>
+            <a href="../../News/news/news.html">Tin tức</a>
+            <a href="../../Esports/esports/esport.html">ESPORTS</a>
+            <a href="../../Store/store/store.html">Store</a>
+            <a href="../../Footer/contact.html">Liên hệ</a>
+        </div>
+    </nav>
+    <div class="main-content">
+        <h1>Genshin Impact - Thế giới mở kỳ ảo đầy cuốn hút</h1>
+        <p>Liên Quân Mobile là một trong những tựa game MOBA hàng đầu trên di động, thu hút hàng triệu người chơi trên toàn thế giới. Trò chơi mang đến những trận đấu chiến thuật gay cấn, nơi người chơi phải phối hợp cùng đồng đội để giành chiến thắng. Với hệ thống tướng đa dạng, mỗi nhân vật sở hữu bộ kỹ năng riêng biệt, giúp người chơi thỏa sức sáng tạo chiến thuật. Ngoài ra, game thường xuyên cập nhật sự kiện, chế độ chơi mới và nhiều phần thưởng hấp dẫn. Đây là tựa game không thể bỏ lỡ dành cho những ai đam mê thể loại MOBA!</p>
+        
+        <h2>Cách chơi cơ bản</h2>
+        <ul>
+            <li><strong>Khám phá thế giới mở</strong> - Người chơi tự do di chuyển, leo trèo, bơi lội và bay lượn để khám phá vùng đất Teyvat rộng lớn.</li>
+            <li><strong>Chiến đấu theo hệ nguyên tố</strong> - Kết hợp 7 nguyên tố: Hỏa, Thủy, Lôi, Băng, Phong, Thảo, Nham để tạo ra phản ứng mạnh mẽ trong chiến đấu.</li>
+            <li><strong>Thu thập và nâng cấp nhân vật</strong> - Mở khóa các nhân vật khác nhau, phát triển kỹ năng, vũ khí và thánh di vật để tối ưu sức mạnh.</li>
+            <li><strong>Hoàn thành nhiệm vụ và cốt truyện</strong> - Hệ thống nhiệm vụ phong phú giúp người chơi hiểu rõ hơn về thế giới Genshin Impact.</li>
+            <li><strong>Tham gia sự kiện và phó bản</strong> - Liên tục có sự kiện mới với phần thưởng hấp dẫn, giúp người chơi trải nghiệm nhiều hoạt động đa dạng.</li>
+        </ul>
+        
+        <h2>Các chế độ chơi</h2>
+        <ul>
+            <li><strong>Khám phá thế giới mở</strong> - Tự do di chuyển, khám phá các vùng đất rộng lớn của Teyvat, thu thập tài nguyên và chiến đấu với quái vật.</li>
+            <li><strong>Phó bản & Bí cảnh</strong> - Khiêu chiến các hầm ngục để nhận phần thưởng giá trị như nguyên liệu nâng cấp nhân vật, vũ khí và thánh di vật.</li>
+            <li><strong>Boss thế giới</strong> - Đánh bại các boss như Sói Bắc Phong, Bóng Ma Rồng hay các Phái Sinh Nguyên Tố để nhận nguyên liệu hiếm.</li>
+            <li><strong>Sự kiện giới hạn</strong> - Thường xuyên có sự kiện đặc biệt với cơ chế chơi mới lạ và nhiều phần thưởng hấp dẫn.</li>
+            <li><strong>Co-op (Chơi cùng bạn bè)</strong> - Ghép đội với bạn bè hoặc người chơi khác để cùng nhau phiêu lưu, chiến đấu và khám phá bí ẩn của Teyvat.</li>
+        </ul>
+        
+        <h2>Một số nhân vật tiêu biểu</h2>
+        <div class="hero-list">
+            <div class="hero">
+                <img src="../img/Lumine.webp" alt="Lumine">
+                <p style="text-align: center;"><strong>Lumine</strong> - Nhân vật chính có thể thay đổi nguyên tố.</p>
+            </div>
+            <div class="hero">
+                <img src="../img/Diluc.webp" alt="Diluc">
+                <p style="text-align: center;"><strong>Diluc</strong> - Kiếm sĩ hệ Hỏa với sát thương lớn.</p>
+            </div>
+            <div class="hero">
+                <img src="../img/Ganyu.webp" alt="Ganyu">
+                <p style="text-align: center;"><strong>Ganyu</strong> - Cung thủ hệ Băng với sát thương tầm xa.</p>
+            </div>
+        </div>
+
+        <h2>Tải game ngay</h2>
+        <div class="download">
+            <a href="https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact" class="btn-download">📲 Google Play</a>
+            <a href="https://apps.apple.com/vn/app/genshin-impact/id1517783697" class="btn-download">📱 App Store</a>
+            <a href="https://genshin.hoyoverse.com/vi/download" class="btn-download">💻 PC & PlayStation</a>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuToggle.addEventListener("click", function() {
+        navLinks.classList.toggle("active");
+    });
+});
+</script>
+</html>

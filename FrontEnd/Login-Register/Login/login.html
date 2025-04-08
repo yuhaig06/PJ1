@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập</title>
+    <link rel="icon" type="image/png" sizes="96x96" href="../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../Home/favicon/site.webmanifest">
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-box" id="login-box">
+            <div class="logo-container">
+                <img src="../../Home/img/logo.png" alt="Logo" class="logo">
+            </div>
+            <h2>Đăng nhập</h2>
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email" required>
+                    <span class="input-icon">✉</span>
+                </div>
+                <div class="input-group">
+                    <input type="password" id="password" placeholder="Mật khẩu" required>
+                    <span class="input-icon">🔒</span>
+                    <span class="password-toggle" onclick="togglePassword('password')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <div class="remember-forgot">
+                    <label>
+                        <input type="checkbox" id="remember"> Ghi nhớ đăng nhập
+                    </label>
+                    <a href="forgot-password.html" class="forgot-link">Quên mật khẩu?</a>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span>Đăng nhập</span>
+                    <span class="btn-icon">→</span>
+                </button>
+                <p class="switch-form">Chưa có tài khoản? <a href="../Register/register.html">Đăng ký ngay</a></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="../../config/api.js"></script>
+    <script>
+        // Check if user is already logged in
+        if (API.auth.isAuthenticated()) {
+            window.location.href = '../../Home/home/home.html';
+        }
+
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const remember = document.getElementById('remember').checked;
+            
+            try {
+                const success = await API.auth.login(email, password);
+                if (success) {
+                    if (remember) {
+                        localStorage.setItem('rememberMe', 'true');
+                    }
+                    window.location.href = '../../Home/home/home.html';
+                } else {
+                    showError('Email hoặc mật khẩu không đúng');
+                }
+            } catch (error) {
+                showError('Đăng nhập thất bại. Vui lòng thử lại sau.');
+            }
+            
+            return false;
+        }
+
+        function showError(message) {
+            const errorDiv = document.createElement('div');
+            errorDiv.className = 'error-message';
+            errorDiv.textContent = message;
+            
+            const form = document.getElementById('loginForm');
+            form.insertBefore(errorDiv, form.firstChild);
+            
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 3000);
+        }
+
+        // Add animation to form elements
+        document.querySelectorAll('.input-group').forEach((group, index) => {
+            group.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = input.nextElementSibling.nextElementSibling.querySelector('i');
+            
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News MobileGames</title>
+    <link rel="stylesheet" href="../../Mobilegame/css/mobilegame.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../Home/favicon/site.webmanifest">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header id="header">
+        <a href="../../Home/home/home.html" class="logo-link">
+            <img src="../../Home/img/logo.png" alt="Logo WarStorm" class="logo">
+        </a>
+        <h1>📱 Tin Tức Game Mobile</h1>
+        <button id="menu-toggle">☰</button>
+        <nav id="mobile-menu">
+            <ul>
+                <li><a href="../../Home/home/home.html">Trang chủ</a></li>
+                <li><a href="../../News/news/news.html">Tin tức</a></li>
+                <li><a href="../../Esports/esports/esport.html">ESPORTS</a></li>
+                <li><a href="../../Store/store.html">Store</a></li>
+                <li><a href="../../Footer/contact.html">Liên hệ</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Tìm kiếm tin tức...">
+        <i class="fas fa-search search-icon"></i>
+    </div>
+
+    <div class="filter-container">
+        <button class="filter-btn active" data-filter="all">Tất cả</button>
+        <button class="filter-btn" data-filter="lienquan">Liên Quân</button>
+        <button class="filter-btn" data-filter="genshin">Genshin Impact</button>
+        <button class="filter-btn" data-filter="pubg">PUBG Mobile</button>
+    </div>
+
+    <section id="news-mobile-1">
+        <div class="mobile-item" data-category="lienquan">
+            <img src="../img/!1.webp" alt="1">
+            <h2>Choáng váng với một trận đấu Liên Quân kéo dài tới hơn 70 phút</h2>
+            <a href="../detail/detail1.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item" data-category="genshin">
+            <img src="../img/@1.webp" alt="2">
+            <h2>Genshin Impact bất ngờ "quay xe" với bộ đôi nhân vật mới, mang đến nhân vật 4 sao "mạnh nhất" lịch sử?</h2>
+            <a href="../detail/detail2.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item" data-category="pubg">
+            <img src="../img/~1.webp" alt="3" loading="lazy">
+            <h2>PUBG MOBILE chiến thắng giải thưởng quốc tế Sensor Tower Apac Awards</h2>
+            <a href="../detail/detail3.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item" data-category="lienquan">
+            <img src="../img/$1.webp" alt="4" loading="lazy">
+            <h2>Team cày thuê tuyên bố kết thúc một trận đấu Liên Quân chỉ trong 4 phút, dưới 4 phút thì sao?</h2>
+            <a href="../detail/detail4.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+    </section>
+
+    <section id="news-mobile-2">
+        <div class="mobile-item" data-category="genshin">
+            <img src="../img/-1.webp" alt="5" loading="lazy">
+            <h2>Sở hữu 300 triệu "Mora", game thủ Genshin Impact nâng cấp thành công toàn bộ Thiên phú của 100 nhân vật!</h2>
+            <a href="../detail/detail5.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item" data-category="pubg">
+            <img src="../img/^1.webp" alt="6" loading="lazy">
+            <h2>Sướng như tuyển thủ PUBG Mobile, vừa đạt thành tích cao vừa được hậu phương ủng hộ hết mình</h2>
+            <a href="../detail/detail6.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item" data-category="lienquan">
+            <img src="../img/&1.webp" alt="7" loading="lazy">
+            <h2>Đây là lý do Liên Quân "có nằm mơ" mới có thể đuổi kịp Vương Giả Vinh Diệu</h2>
+            <a href="../detail/detail7.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+
+        <div class="mobile-item" data-category="genshin">
+            <img src="../img/`1.webp" alt="8" loading="lazy">
+            <h2>Tiếp tục hé lộ thêm danh tính của một nhân vật Genshin Impact mới, là một "siêu DPS", có tạo hình "công chúa" cực đáng yêu?</h2>
+            <a href="../detail/detail8.html" class="see-more-btn">Xem Thêm</a>
+        </div>
+    </section>
+
+    <div class="loading"></div>
+    <div class="load-more-wrapper">
+        <button class="btn-load-more" id="loadMoreBtn">Tải thêm bài viết</button>
+    </div>
+
+    <button class="dark-mode-toggle" id="darkModeToggle">
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <footer class="container">
+        <p>&copy; 2025 WarStorm. All rights reserved.</p>
+        <a href="../../Footer/privacy-policy.html">Chính sách bảo mật</a>
+        <a href="../../Footer/terms-and-conditions.html">Điều khoản sử dụng</a>
+        <a href="../../Footer/contact.html">Liên hệ</a>
+    </footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuToggle = document.getElementById("menu-toggle");
+        const mobileMenu = document.getElementById("mobile-menu");
+
+        menuToggle.addEventListener("click", function () {
+            mobileMenu.classList.toggle("active");
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!menuToggle.contains(event.target) && !mobileMenu.contains(event.target)) {
+                mobileMenu.classList.remove("active");
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const loadMoreBtn = document.getElementById("loadMoreBtn");
+        const hiddenMobiles = document.querySelectorAll(".mobile-item-sub");
+        const loading = document.querySelector(".loading");
+        let currentIndex = 0;
+        const mobilePerClick = 4; // Changed from 2 to 4
+
+        // Initially hide items in news-mobile-2
+        document.querySelectorAll("#news-mobile-2 .mobile-item").forEach(item => {
+            item.style.display = "none";
+        });
+
+        loadMoreBtn.addEventListener("click", function() {
+            loading.style.display = "block";
+            loadMoreBtn.style.display = "none";
+
+            setTimeout(() => {
+                // Show next set of items
+                const items = document.querySelectorAll("#news-mobile-2 .mobile-item");
+                for (let i = currentIndex; i < currentIndex + mobilePerClick; i++) {
+                    if (items[i]) {
+                        items[i].style.display = "block";
+                        items[i].style.animation = "fadeIn 0.5s ease forwards";
+                    }
+                }
+
+                currentIndex += mobilePerClick;
+                loading.style.display = "none";
+
+                // Show load more button only if there are more items to show
+                if (currentIndex < items.length) {
+                    loadMoreBtn.style.display = "block";
+                }
+            }, 1000);
+        });
+
+        // Lazy loading for images
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute('data-src');
+                    img.removeAttribute('loading');
+                    observer.unobserve(img);
+                }
+            });
+        });
+
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            imageObserver.observe(img);
+        });
+    });
+
+    // Search Functionality
+    const searchInput = document.querySelector(".search-input");
+    const mobileItems = document.querySelectorAll(".mobile-item, .mobile-item-sub");
+
+    searchInput.addEventListener("input", function() {
+        const searchTerm = this.value.toLowerCase();
+
+        mobileItems.forEach(item => {
+            const title = item.querySelector("h2").textContent.toLowerCase();
+            if (title.includes(searchTerm)) {
+                item.style.display = "block";
+            } else {
+                item.style.display = "none";
+            }
+        });
+    });
+
+    // Filter Functionality
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener("click", function() {
+            // Remove active class from all buttons
+            filterBtns.forEach(btn => btn.classList.remove("active"));
+            // Add active class to clicked button
+            this.classList.add("active");
+
+            const filter = this.getAttribute("data-filter");
+
+            mobileItems.forEach(item => {
+                if (filter === "all" || item.getAttribute("data-category") === filter) {
+                    item.style.display = "block";
+                    item.style.animation = "fadeIn 0.5s ease forwards";
+                } else {
+                    item.style.display = "none";
+                }
+            });
+        });
+    });
+
+    // Dark Mode Toggle
+    const darkModeToggle = document.getElementById("darkModeToggle");
+    const body = document.body;
+
+    // Check for saved dark mode preference
+    if (localStorage.getItem("darkMode") === "enabled") {
+        body.classList.add("dark-mode");
+        darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+
+    darkModeToggle.addEventListener("click", function() {
+        body.classList.toggle("dark-mode");
+        
+        if (body.classList.contains("dark-mode")) {
+            localStorage.setItem("darkMode", "enabled");
+            this.innerHTML = '<i class="fas fa-sun"></i>';
+        } else {
+            localStorage.setItem("darkMode", "disabled");
+            this.innerHTML = '<i class="fas fa-moon"></i>';
+        }
+    });
+
+    // Xóa hết code lazy loading cũ và thay thế bằng code mới đơn giản
+    document.addEventListener("DOMContentLoaded", function() {
+        // Load tất cả ảnh ngay lập tức 
+        document.querySelectorAll('img[data-src]').forEach(img => {
+            img.src = img.getAttribute('data-src');
+            img.removeAttribute('data-src');
+            img.removeAttribute('loading');
+        });
+
+        // Code cho load more button và các chức năng khác giữ nguyên
+    });
+</script>
+
+<style>
+.mobile-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+/* Loại bỏ toàn bộ animation và transition không cần thiết */
+.mobile-item {
+    background: #1e1e1e;
+    position: relative;
+    overflow: hidden;
+}
+</style>
+
+</body>
+</html>

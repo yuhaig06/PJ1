@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PUBG Mobile</title>
+    <link rel="stylesheet" href="../../Home/fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../Home/favicon/site.webmanifest">
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #121212;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    padding-top: 60px;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.nav-links {
+    display: flex;
+}
+
+@media (min-width: 769px) {
+    .nav-links {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #FF4C4C;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 200px;
+        padding: 10px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #FF4C4C;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #FFD700;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 80px auto 20px;
+    padding: 20px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.main-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+}
+
+p {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+img {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 1;
+}
+.download {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-download {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 15px;
+    background: #ff5733;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-download:hover {
+    background: #d43f00;
+}
+</style>
+<body>
+    <nav>
+        <a href="../../Home/home/home.html">Quay Lại Trang Chủ</a>
+        <div class="menu-toggle">☰</div>
+        <div class="nav-links">
+            <a href="../../Home/home/home.html">Trang chủ</a>
+            <a href="../../News/news/news.html">Tin tức</a>
+            <a href="../../Esports/esports/esport.html">ESPORTS</a>
+            <a href="../../Store/store/store.html">Store</a>
+            <a href="../../Footer/contact.html">Liên hệ</a>
+        </div>
+    </nav>
+    <div class="main-content">
+        <h1>PUBG Mobile - Battle Royale sinh tồn hấp dẫn</h1>
+        <p>PUBG Mobile là tựa game bắn súng sinh tồn hàng đầu thế giới, đưa người chơi vào những trận chiến căng thẳng với 100 người trên một hòn đảo hoang. Người chơi sẽ nhảy dù, thu thập vũ khí, trang bị và chiến đấu để trở thành người sống sót cuối cùng. Với đồ họa chân thực, hệ thống súng đa dạng và nhiều chế độ chơi hấp dẫn, PUBG Mobile mang đến trải nghiệm sinh tồn đỉnh cao. Game cũng thường xuyên cập nhật sự kiện, bản đồ mới và các chế độ độc đáo, đảm bảo người chơi luôn có những thử thách mới mẻ!</p>
+        
+        <h2>Cách chơi cơ bản</h2>
+        <ul>
+            <li><strong>Nhảy dù & tìm kiếm trang bị</strong> - Người chơi bắt đầu bằng cách nhảy dù xuống bản đồ, tìm kiếm súng, đạn và vật phẩm hỗ trợ.</li>
+            <li><strong>Chiến đấu & sinh tồn</strong> - Hạ gục đối thủ, tránh vòng bo và giữ vị trí an toàn để sinh tồn lâu nhất có thể.</li>
+            <li><strong>Chơi đơn, đôi hoặc tổ đội</strong> - Cạnh tranh một mình hoặc lập nhóm cùng bạn bè để chiến đấu hiệu quả hơn.</li>
+            <li><strong>Lựa chọn bản đồ & chế độ chơi</strong> - Erangel, Miramar, Sanhok và nhiều bản đồ khác với môi trường chiến đấu khác nhau.</li>
+            <li><strong>Sử dụng phương tiện</strong> - Xe hơi, mô tô, tàu thuyền giúp di chuyển nhanh và tạo chiến thuật độc đáo.</li>
+        </ul>
+        
+        <h2>Các chế độ chơi</h2>
+        <ul>
+            <li><strong>Battle Royale (100 người)</strong> - Chế độ sinh tồn cổ điển, chiến đấu đến khi chỉ còn một người hoặc một đội sống sót.</li>
+            <li><strong>Arcade Mode</strong> - Các chế độ chơi nhanh như War Mode, Quick Match giúp giải trí nhanh chóng.</li>
+            <li><strong>TDM (Team Deathmatch)</strong> - Hai đội đối đầu với nhau, mục tiêu là hạ gục nhiều đối thủ nhất trong thời gian giới hạn.</li>
+            <li><strong>Payload Mode</strong> - Trang bị vũ khí hạng nặng, máy bay chiến đấu và tên lửa để tạo nên những trận chiến khốc liệt.</li>
+            <li><strong>Zombie Mode</strong> - Sinh tồn trước làn sóng zombie tấn công, kết hợp giữa bắn súng và yếu tố kinh dị.</li>
+        </ul>
+        
+        <h2>Một số vũ khí tiêu biểu</h2>
+        <div class="hero-list">
+            <div class="hero">
+                <img src="../img/M416.png" alt="M416">
+                <p style="text-align: center;"><strong>M416</strong> - Súng trường tấn công ổn định, dễ kiểm soát.</p>
+            </div>
+            <div class="hero">
+                <img src="../img/Kar98k.png" alt="Kar98k">
+                <p style="text-align: center;"><strong>Kar98k</strong> - Súng bắn tỉa phổ biến, sát thương cao.</p>
+            </div>
+            <div class="hero">
+                <img src="../img/AWM.png" alt="AWM">
+                <p style="text-align: center;"><strong>AWM</strong> - - Súng bắn tỉa mạnh nhất, có thể hạ gục đối thủ với một viên đạn.</p>
+            </div>
+            <div class="hero">
+                <img src="../img/UZI.png" alt="Uzi">
+                <p style="text-align: center;"><strong>Uzi</strong> - - SMG tốc độ bắn cao, cực kỳ hiệu quả ở cự ly gần.</p>
+            </div>
+        </div>
+
+        <h2>Tải game ngay</h2>
+        <div class="download">
+            <a href="https://play.google.com/store/apps/details?id=com.tencent.ig" class="btn-download">📲 Google Play</a>
+            <a href="https://apps.apple.com/vn/app/pubg-mobile/id1330123889" class="btn-download">📱 App Store</a>
+            <a href="https://pubgmobile.com/en-US/download/" class="btn-download">💻 PC Emulator</a>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuToggle.addEventListener("click", function() {
+        navLinks.classList.toggle("active");
+    });
+});
+</script>
+</html>

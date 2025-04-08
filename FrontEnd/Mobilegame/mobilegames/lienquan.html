@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên Quân Mobile</title>
+    <link rel="stylesheet" href="../../Home/fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="icon" type="image/png" sizes="96x96" href="../../Home/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="../../Home/favicon/web-app-manifest-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="../../Home/favicon/web-app-manifest-512x512.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../Home/favicon/apple-touch-icon.png">
+    <link rel="manifest" href="../../Home/favicon/site.webmanifest">
+</head>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #121212;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    padding: 20px;
+    padding-top: 60px;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.nav-links {
+    display: flex;
+}
+
+@media (min-width: 769px) {
+    .nav-links {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        background: #FF4C4C;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 200px;
+        padding: 10px;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #FF4C4C;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    margin-right: 10px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #FFD700;
+}
+
+.main-content {
+    max-width: 1200px;
+    margin: 80px auto 20px;
+    padding: 20px;
+    background: #1e1e1e;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.main-content ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+h1 {
+    font-size: 24px;
+    text-align: center;
+}
+
+p {
+    text-align: justify;
+    line-height: 1.6;
+}
+
+img {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+h2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    line-height: 1;
+}
+.download {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-download {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 15px;
+    background: #ff5733;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn-download:hover {
+    background: #d43f00;
+}
+</style>
+<body>
+    <nav>
+        <a href="../../Home/home/home.html">Quay Lại Trang Chủ</a>
+        <div class="menu-toggle">☰</div>
+        <div class="nav-links">
+            <a href="../../Home/home/home.html">Trang chủ</a>
+            <a href="../../News/news/news.html">Tin tức</a>
+            <a href="../../Esports/esports/esport.html">ESPORTS</a>
+            <a href="../../Store/store/store.html">Store</a>
+            <a href="../../Footer/contact.html">Liên hệ</a>
+        </div>
+    </nav>
+    <div class="main-content">
+        <h1>Liên Quân Mobile - MOBA đỉnh cao trên di động</h1>
+        <p>Liên Quân Mobile là một trong những tựa game MOBA hàng đầu trên di động, thu hút hàng triệu người chơi trên toàn thế giới. Trò chơi mang đến những trận đấu chiến thuật gay cấn, nơi người chơi phải phối hợp cùng đồng đội để giành chiến thắng. Với hệ thống tướng đa dạng, mỗi nhân vật sở hữu bộ kỹ năng riêng biệt, giúp người chơi thỏa sức sáng tạo chiến thuật. Ngoài ra, game thường xuyên cập nhật sự kiện, chế độ chơi mới và nhiều phần thưởng hấp dẫn. Đây là tựa game không thể bỏ lỡ dành cho những ai đam mê thể loại MOBA!</p>
+        
+        <h2>Cách chơi cơ bản</h2>
+        <ul>
+            <li><strong>Chọn tướng theo chiến thuật</strong> - Mỗi tướng có vai trò riêng như Đỡ đòn, Pháp sư, Xạ thủ, Sát thủ, Trợ thủ. Hãy chọn đúng tướng để phối hợp tốt với đội hình.</li>
+            <li><strong>Hợp tác đồng đội để chiến thắng</strong> - Liên Quân là game đồng đội, giao tiếp và phối hợp là chìa khóa dẫn đến chiến thắng.</li>
+            <li><strong>Leo rank và nhận thưởng</strong> - Chế độ xếp hạng giúp người chơi thử thách bản thân, đạt mức rank cao sẽ có phần thưởng hấp dẫn.</li>
+            <li><strong>Kiểm soát bản đồ & mục tiêu lớn</strong> - Quan sát bản đồ, kiểm soát Rồng, Tà thần Caesar, Trụ để tạo lợi thế lớn.</li>
+            <li><strong>Nâng cấp kỹ năng và trang bị</strong> - Lựa chọn ngọc bổ trợ, bảng phù hiệu và lên đồ hợp lý sẽ giúp tướng mạnh hơn trong trận đấu.</li>
+        </ul>
+        
+        <h2>Các chế độ chơi</h2>
+        <ul>
+            <li><strong>5v5 Đấu Hạng</strong> - Tranh tài cùng đồng đội, leo rank từ Đồng đến Thách Đấu. Đấu trí và kỹ năng quyết định chiến thắng!</li>
+            <li><strong>3v3 Đấu Trường Sinh Tử</strong> - Bản đồ nhỏ hơn, giao tranh nhanh hơn, thích hợp cho những trận đấu tốc độ cao.</li>
+            <li><strong>1v1 So Tài Kỹ Năng</strong> - Đối đầu trực tiếp, chứng tỏ bản lĩnh cá nhân, không còn phụ thuộc vào đồng đội.</li>
+            <li>
+                <p>Chế độ Giải Trí</p>
+                <p><strong>Cờ Liên Quân</strong> - Chiến thuật tự động với đội hình tướng Liên Quân.</p>
+                <p><strong>Đấu Nhân Bản</strong> - Cả đội cùng chọn một vị tướng, tạo nên những trận chiến cực kỳ hỗn loạn và vui nhộn.</p>
+                <p>Còn nhiều chế độ thú vị khác đang chờ đón!</p>
+            </li>
+        </ul>
+        
+        <h2>Một số tướng tiêu biểu</h2>
+        <div class="hero-list">
+            <div class="hero">
+                <img src="../img/Tulen.jpg" alt="Tulen">
+                <p style="text-align: center;"><strong>Tulen</strong> - Pháp sư với kỹ năng mạnh.</p>
+            </div>
+            <div class="hero">
+                <img src="../img/Yorn.jpg" alt="Yorn">
+                <p style="text-align: center;"><strong>Yorn</strong> - Xạ thủ bắn xa.</p>
+            </div>
+            <div class="hero">
+                <img src="../img/Maloch.jpg" alt="Maloch">
+                <p style="text-align: center;"><strong>Maloch</strong> - Đấu sĩ cứng cáp.</p>
+            </div>
+        </div>
+        
+        <h2>Tải game ngay</h2>
+        <div class="download">
+            <a href="https://play.google.com/store/apps/details?id=com.garena.game.kgvn" class="btn-download">📲 Google Play</a>
+            <a href="https://apps.apple.com/vn/app/arena-of-valor/id1150318642" class="btn-download">📱 App Store</a>
+        </div>
+    </div>
+</body>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuToggle.addEventListener("click", function() {
+        navLinks.classList.toggle("active");
+    });
+});
+</script>
+</html>
