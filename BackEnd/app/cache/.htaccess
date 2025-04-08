@@ -1,0 +1,18 @@
+# Deny access to all files in this directory
+Order deny,allow
+Deny from all
+
+# Prevent directory listing
+Options -Indexes
+
+# Prevent access to .htaccess
+<Files .htaccess>
+    Order allow,deny
+    Deny from all
+</Files>
+
+# Prevent access to all files
+<FilesMatch ".*">
+    Order allow,deny
+    Deny from all
+</FilesMatch> 

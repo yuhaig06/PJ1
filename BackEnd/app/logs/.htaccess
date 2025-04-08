@@ -1,0 +1,12 @@
+# Deny access to all files in this directory
+Order deny,allow
+Deny from all
+
+# Disable directory listing
+Options -Indexes
+
+# Protect against script execution
+<FilesMatch ".(php|php3|php4|php5|phtml|pl|py|jsp|asp|htm|html|shtml|sh|cgi)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch> 

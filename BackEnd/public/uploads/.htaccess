@@ -1,0 +1,20 @@
+# Deny access to all file types except images
+<FilesMatch ".(jpg|jpeg|png|gif)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>
+
+# Deny access to all other file types
+<FilesMatch "^(?!(.*\.(jpg|jpeg|png|gif)$))">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Disable directory listing
+Options -Indexes
+
+# Protect against script execution
+<FilesMatch ".(php|php3|php4|php5|phtml|pl|py|jsp|asp|htm|html|shtml|sh|cgi)$">
+    Order Deny,Allow
+    Deny from all
+</FilesMatch> 
