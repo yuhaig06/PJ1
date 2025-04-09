@@ -190,16 +190,32 @@ class NewsController extends Controller
         }
     }
 
-    /**
-     * Thêm bình luận
-     */
-    public function addComment($newsId)
-    {
-        if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    private function checkUserLoggedIn() {
+        return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+    }
+
+    private function checkUserRole($roles = ['admin', 'moderator']) {
+        if (!$this->checkUserLoggedIn() || !isset($_SESSION['role'])) {
+            return false;
+        }
+        return in_array($_SESSION['role'], $roles);
+    }
+
+    private function requireAuth() {
+        if (!$this->checkUserLoggedIn()) {
             return $this->json([
                 'status' => 'error',
-                'message' => 'Bạn cần đăng nhập để bình luận'
+                'message' => 'Bạn cần đăng nhập để thực hiện hành động này'
             ], 401);
+        }
+        return true;
+    }
+
+    public function addComment($newsId)
+    {
+        $authCheck = $this->requireAuth();
+        if ($authCheck !== true) {
+            return $authCheck;
         }
 
         if (!$this->rateLimitMiddleware->checkLimit('add_comment', 10, 300)) {
@@ -261,7 +277,7 @@ class NewsController extends Controller
      * Duyệt bình luận
      */
     private function isAuthorized() {
-        if (!isset($_SESSION['user_id']) || !isset($_SESSION['role'])) {
+        if (!$this->checkUserLoggedIn() || !isset($_SESSION['role'])) {
             return false;
         }
         return in_array($_SESSION['role'], ['admin', 'moderator']);

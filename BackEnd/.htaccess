@@ -1,19 +1,40 @@
 RewriteEngine On
-RewriteBase /PJ1/
+RewriteBase /PJ1/BackEnd/
 
-# Bảo vệ file .htaccess
+# Remove duplicate CORS headers
+Header unset Access-Control-Allow-Origin
+Header unset Access-Control-Allow-Methods
+Header unset Access-Control-Allow-Headers
+Header unset Access-Control-Allow-Credentials
+
+# Set CORS headers once
+Header set Access-Control-Allow-Origin "http://127.0.0.1:5501"
+Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
+Header set Access-Control-Allow-Headers "Content-Type, Accept, Authorization"
+Header set Access-Control-Allow-Credentials "true"
+
+# Handle OPTIONS preflight
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+
+# Route to index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
+
+# Protect .htaccess file
 <Files .htaccess>
     Order Allow,Deny
     Deny from all
 </Files>
 
-# Bảo vệ các file nhạy cảm
+# Protect sensitive files
 <FilesMatch "^(config\.php|\.env|\.git)">
     Order Allow,Deny
     Deny from all
 </FilesMatch>
 
-# Bật GZIP compression
+# Enable GZIP compression
 <IfModule mod_deflate.c>
     AddOutputFilterByType DEFLATE text/plain
     AddOutputFilterByType DEFLATE text/html
@@ -37,26 +58,12 @@ RewriteBase /PJ1/
     ExpiresByType application/javascript "access plus 1 month"
 </IfModule>
 
-# CORS Headers
-<IfModule mod_headers.c>
-    Header set Access-Control-Allow-Origin "*"
-    Header set Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-    Header set Access-Control-Allow-Headers "Content-Type, Authorization"
-</IfModule>
-
-# Kiểm tra nếu là file hoặc thư mục thực, không áp dụng rewrite
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-
-# Điều hướng tất cả yêu cầu vào init.php, thêm tham số 'url'
-RewriteRule ^(.*)$ app/init.php?url=$1 [QSA,L]
-
-# Định nghĩa trang lỗi
+# Define error pages
 ErrorDocument 404 /PJ1/public/404.php
 ErrorDocument 403 /PJ1/public/403.php
 ErrorDocument 500 /PJ1/public/500.php
 
-# Tắt directory listing
+# Disable directory listing
 Options -Indexes
 
 # PHP settings
@@ -65,4 +72,5 @@ Options -Indexes
     php_value post_max_size 10M
     php_value max_execution_time 300
     php_value max_input_time 300
+    php_flag display_errors off
 </IfModule>

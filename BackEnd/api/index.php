@@ -1,13 +1,13 @@
 <?php
 session_start();
 
-// Enable CORS
+// Cấu hình CORS
 header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Content-Type');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
 header('Content-Type: application/json');
 
-// Handle preflight requests
+// Xử lý OPTIONS request
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     http_response_code(200);
     exit();
@@ -15,9 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 
 require_once '../vendor/autoload.php';
 
-// Get request path
+// Xử lý routing
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$uri = str_replace('/PJ1/BackEnd/public/', '', $uri);
+$uri = str_replace('/PJ1/BackEnd/api/', '', $uri);
 $uri = explode('/', $uri);
 
 try {
@@ -28,17 +28,14 @@ try {
             case 'register':
                 echo $controller->register();
                 break;
-            case 'login':
-                echo $controller->login();
-                break;
             default:
-                throw new Exception('Route not found');
+                throw new Exception('Endpoint không hợp lệ');
         }
     } else {
-        throw new Exception('Invalid endpoint');
+        throw new Exception('Request không hợp lệ');
     }
 } catch (Exception $e) {
-    http_response_code(404);
+    http_response_code(500);
     echo json_encode([
         'status' => 'error',
         'message' => $e->getMessage()

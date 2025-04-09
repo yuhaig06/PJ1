@@ -8,10 +8,16 @@ use App\Middleware\AuthMiddleware;
 use App\Middleware\CSRFMiddleware;
 use App\Middleware\RateLimitMiddleware;
 use App\Config\Database;
+use App\Traits\JsonResponseTrait;
+use PDOException;
+use InvalidArgumentException;
+use RuntimeException;
 
 class AuthController extends Controller
 {
-    private $db;
+    use JsonResponseTrait;
+
+    private $dbConnection;  // Thay thế private $db
     private $userModel;
     private $authMiddleware;
     private $csrfMiddleware;
@@ -20,11 +26,15 @@ class AuthController extends Controller
     public function __construct()
     {
         parent::__construct(); // Đảm bảo lớp cha có phương thức __construct()
-        $this->db = Database::getInstance()->getConnection();
-        $this->userModel = new UserModel($this->db);
+        $this->dbConnection = Database::getInstance()->getConnection();
+        $this->userModel = new UserModel($this->dbConnection);
         $this->authMiddleware = new AuthMiddleware();
         $this->csrfMiddleware = new CSRFMiddleware();
         $this->rateLimitMiddleware = new RateLimitMiddleware();
+    }
+
+    private function checkUserLoggedIn() {
+        return isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
     }
 
     /**
@@ -33,65 +43,139 @@ class AuthController extends Controller
     public function register()
     {
         try {
+            // Get POST data
             $data = json_decode(file_get_contents('php://input'), true);
-            
-            if (!isset($data['username']) || !isset($data['email']) || !isset($data['password'])) {
-                return $this->jsonResponse(['success' => false, 'message' => 'All fields are required'], 400);
+
+            // Validate required fields
+            $required = ['username', 'email', 'password', 'fullname', 'phone'];
+            foreach ($required as $field) {
+                if (empty($data[$field])) {
+                    return $this->json([
+                        'status' => 'error',
+                        'message' => "Field $field is required"
+                    ], 400);
+                }
+            }
+
+            // Check if username or email already exists
+            if ($this->userModel->findByUsername($data['username'])) {
+                return $this->json([
+                    'status' => 'error',
+                    'message' => 'Username already exists'
+                ], 400);
             }
 
             if ($this->userModel->findByEmail($data['email'])) {
-                return $this->jsonResponse(['success' => false, 'message' => 'Email already exists'], 400);
+                return $this->json([
+                    'status' => 'error',
+                    'message' => 'Email already exists'
+                ], 400);
             }
 
-            $data['password'] = AuthMiddleware::hashPassword($data['password']);
-            $data['verification_token'] = bin2hex(random_bytes(32));
-            
-            $userId = $this->userModel->create($data);
-            
-            if ($userId) {
-                // Send verification email
-                $this->sendVerificationEmail($data['email'], $data['verification_token']);
-                
-                return $this->jsonResponse([
-                    'success' => true,
-                    'message' => 'Registration successful. Please check your email to verify your account.'
-                ]);
-            }
-            
-            return $this->jsonResponse(['success' => false, 'message' => 'Registration failed'], 500);
-        } catch (\Exception $e) {
-            return $this->jsonResponse(['success' => false, 'message' => 'Registration failed'], 500);
+            // Create user
+            $userId = $this->userModel->create([
+                'username' => $data['username'],
+                'email' => $data['email'],
+                'password' => password_hash($data['password'], PASSWORD_DEFAULT),
+                'fullname' => $data['fullname'],
+                'phone' => $data['phone'],
+                'role' => 'user'
+            ]);
+
+            return $this->json([
+                'status' => 'success',
+                'message' => 'Registration successful'
+            ]);
+
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage());
+            return $this->json([
+                'status' => 'error',
+                'message' => 'Lỗi kết nối cơ sở dữ liệu'
+            ], 500);
+        } catch (InvalidArgumentException $e) {
+            return $this->json([
+                'status' => 'error', 
+                'message' => $e->getMessage()
+            ], 400);
+        } catch (RuntimeException $e) {
+            error_log('Runtime error: ' . $e->getMessage());
+            return $this->json([
+                'status' => 'error',
+                'message' => 'Lỗi hệ thống'
+            ], 500);
         }
     }
 
     /**
      * Đăng nhập
      */
-    public function login()
+    public function login($data = null) 
     {
         try {
-            $data = json_decode(file_get_contents('php://input'), true);
+            if (!$data) {
+                $data = json_decode(file_get_contents('php://input'), true);
+            }
             
+            error_log('Login data: ' . print_r($data, true));
+
             if (!isset($data['email']) || !isset($data['password'])) {
-                return $this->jsonResponse(['success' => false, 'message' => 'Email and password are required'], 400);
+                return $this->jsonResponse([
+                    'success' => false,
+                    'message' => 'Email và mật khẩu không được để trống'
+                ], 400);
             }
 
             $user = $this->userModel->findByEmail($data['email']);
             
-            if (!$user || !AuthMiddleware::validatePassword($data['password'], $user['password'])) {
-                return $this->jsonResponse(['success' => false, 'message' => 'Invalid email or password'], 401);
+            if (!$user) {
+                return $this->jsonResponse([
+                    'success' => false,
+                    'message' => 'Email hoặc mật khẩu không đúng'
+                ], 401);
             }
 
-            $token = AuthMiddleware::generateToken($user);
+            if (!password_verify($data['password'], $user['password'])) {
+                return $this->jsonResponse([
+                    'success' => false,
+                    'message' => 'Email hoặc mật khẩu không đúng'
+                ], 401);
+            }
+
+            // Generate token
+            $token = bin2hex(random_bytes(32));
             
+            // Save user session
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['token'] = $token;
+
+            // Remove password from response
             unset($user['password']);
+
             return $this->jsonResponse([
                 'success' => true,
+                'message' => 'Đăng nhập thành công',
                 'token' => $token,
                 'user' => $user
             ]);
-        } catch (\Exception $e) {
-            return $this->jsonResponse(['success' => false, 'message' => 'Login failed'], 500);
+
+        } catch (PDOException $e) {
+            error_log('Database error: ' . $e->getMessage());
+            return $this->jsonResponse([
+                'success' => false,
+                'message' => 'Lỗi kết nối cơ sở dữ liệu'
+            ], 500);
+        } catch (InvalidArgumentException $e) {
+            return $this->jsonResponse([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 400);
+        } catch (RuntimeException $e) {
+            error_log('Runtime error: ' . $e->getMessage());
+            return $this->jsonResponse([
+                'success' => false, 
+                'message' => 'Lỗi xử lý yêu cầu'
+            ], 500);
         }
     }
 
@@ -100,8 +184,7 @@ class AuthController extends Controller
      */
     public function logout()
     {
-        // Kiểm tra đăng nhập
-        if (!$this->authMiddleware->check()) {
+        if (!$this->checkUserLoggedIn()) {
             return $this->json([
                 'success' => false,
                 'message' => 'Chưa đăng nhập'
@@ -126,8 +209,7 @@ class AuthController extends Controller
      */
     public function me()
     {
-        // Kiểm tra đăng nhập
-        if (!$this->authMiddleware->check()) {
+        if (!$this->checkUserLoggedIn()) {
             return $this->json([
                 'success' => false,
                 'message' => 'Chưa đăng nhập'
@@ -209,7 +291,8 @@ class AuthController extends Controller
                 return $this->jsonResponse(['success' => false, 'message' => 'Invalid or expired token'], 400);
             }
 
-            $hashedPassword = AuthMiddleware::hashPassword($data['newPassword']);
+            // Thay thế AuthMiddleware::hashPassword bằng password_hash
+            $hashedPassword = password_hash($data['newPassword'], PASSWORD_DEFAULT);
             $this->userModel->updatePassword($user['id'], $hashedPassword);
             $this->userModel->clearResetToken($user['id']);
             
@@ -225,38 +308,69 @@ class AuthController extends Controller
     /**
      * Cập nhật thông tin cá nhân
      */
+    private function validateProfileData($data) {
+        $errors = [];
+        
+        // Validate full name
+        if (empty($data['full_name'])) {
+            $errors['full_name'] = 'Họ tên không được để trống';
+        } elseif (strlen($data['full_name']) > 100) {
+            $errors['full_name'] = 'Họ tên không được vượt quá 100 ký tự';
+        }
+
+        // Validate avatar if exists
+        if (isset($_FILES['avatar'])) {
+            $file = $_FILES['avatar'];
+            // Check file size (max 2MB)
+            if ($file['size'] > 2 * 1024 * 1024) {
+                $errors['avatar'] = 'Kích thước file không được vượt quá 2MB';
+            }
+            // Check file type
+            $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+            if (!in_array($file['type'], $allowedTypes)) {
+                $errors['avatar'] = 'Chỉ chấp nhận file ảnh (JPG, PNG, GIF)';
+            }
+        }
+
+        return [
+            'success' => empty($errors),
+            'errors' => $errors,
+            'data' => $data
+        ];
+    }
+
     public function updateProfile()
     {
-        // Kiểm tra đăng nhập
-        if (!$this->authMiddleware->check()) {
+        if (!$this->checkUserLoggedIn()) {
             return $this->json([
                 'success' => false,
                 'message' => 'Chưa đăng nhập'
             ], 401);
         }
 
-        // Validate dữ liệu
-        $data = $this->validate([
-            'full_name' => 'required|max:100',
-            'avatar' => 'nullable|image|max:2048'
-        ]);
-
-        if (!$data['success']) {
+        // Get and validate data
+        $data = [
+            'full_name' => $_POST['full_name'] ?? ''
+        ];
+        
+        $validationResult = $this->validateProfileData($data);
+        
+        if (!$validationResult['success']) {
             return $this->json([
                 'success' => false,
                 'message' => 'Dữ liệu không hợp lệ',
-                'errors' => $data['errors']
+                'errors' => $validationResult['errors']
             ], 422);
         }
 
         $userId = $_SESSION['user_id'];
         $updateData = [
-            'full_name' => $data['data']['full_name']
+            'full_name' => $data['full_name']
         ];
 
         // Xử lý upload avatar
         if (isset($_FILES['avatar'])) {
-            $avatar = $this->uploadFile('avatar', 'avatars');
+            $avatar = $this->handleFileUpload('avatar', 'avatars');
             if ($avatar['success']) {
                 $updateData['avatar'] = $avatar['path'];
             }
@@ -279,27 +393,52 @@ class AuthController extends Controller
     /**
      * Đổi mật khẩu
      */
+    private function validatePasswordData($data) {
+        $errors = [];
+        
+        // Validate current password
+        if (empty($data['current_password'])) {
+            $errors['current_password'] = 'Mật khẩu hiện tại không được để trống';
+        }
+
+        // Validate new password
+        if (empty($data['new_password'])) {
+            $errors['new_password'] = 'Mật khẩu mới không được để trống';
+        } elseif (strlen($data['new_password']) < 6) {
+            $errors['new_password'] = 'Mật khẩu mới phải có ít nhất 6 ký tự';
+        } elseif (strlen($data['new_password']) > 50) {
+            $errors['new_password'] = 'Mật khẩu mới không được vượt quá 50 ký tự';
+        }
+
+        return [
+            'success' => empty($errors),
+            'errors' => $errors,
+            'data' => $data
+        ];
+    }
+
     public function changePassword()
     {
-        // Kiểm tra đăng nhập
-        if (!$this->authMiddleware->check()) {
+        if (!$this->checkUserLoggedIn()) {
             return $this->json([
                 'success' => false,
                 'message' => 'Chưa đăng nhập'
             ], 401);
         }
 
-        // Validate dữ liệu
-        $data = $this->validate([
-            'current_password' => 'required',
-            'new_password' => 'required|min:6|max:50'
-        ]);
-
-        if (!$data['success']) {
+        // Get and validate password data
+        $data = [
+            'current_password' => $_POST['current_password'] ?? '',
+            'new_password' => $_POST['new_password'] ?? ''
+        ];
+        
+        $validationResult = $this->validatePasswordData($data);
+        
+        if (!$validationResult['success']) {
             return $this->json([
                 'success' => false,
                 'message' => 'Dữ liệu không hợp lệ',
-                'errors' => $data['errors']
+                'errors' => $validationResult['errors']
             ], 422);
         }
 
@@ -485,5 +624,70 @@ class AuthController extends Controller
         header('Content-Type: application/json');
         echo json_encode($data);
         exit;
+    }
+
+    private function handleFileUpload($inputName, $uploadDir) {
+        if (!isset($_FILES[$inputName])) {
+            return [
+                'success' => false,
+                'message' => 'No file uploaded'
+            ];
+        }
+
+        $file = $_FILES[$inputName];
+        $fileName = $file['name'];
+        $fileTmpName = $file['tmp_name'];
+        $fileSize = $file['size'];
+        $fileError = $file['error'];
+
+        // Validate file
+        if ($fileError !== UPLOAD_ERR_OK) {
+            return [
+                'success' => false,
+                'message' => 'Upload failed with error code: ' . $fileError
+            ];
+        }
+
+        // Validate file size (max 2MB)
+        if ($fileSize > 2097152) {
+            return [
+                'success' => false,
+                'message' => 'File size too large (max 2MB)'
+            ];
+        }
+
+        // Validate file type
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $fileType = mime_content_type($fileTmpName);
+        if (!in_array($fileType, $allowedTypes)) {
+            return [
+                'success' => false,
+                'message' => 'Invalid file type'
+            ];
+        }
+
+        // Generate unique filename
+        $fileExt = pathinfo($fileName, PATHINFO_EXTENSION);
+        $newFileName = uniqid() . '.' . $fileExt;
+
+        // Create upload directory if not exists
+        $uploadPath = __DIR__ . '/../../../uploads/' . $uploadDir;
+        if (!file_exists($uploadPath)) {
+            mkdir($uploadPath, 0777, true);
+        }
+
+        // Move uploaded file
+        $destination = $uploadPath . '/' . $newFileName;
+        if (!move_uploaded_file($fileTmpName, $destination)) {
+            return [
+                'success' => false,
+                'message' => 'Failed to move uploaded file'
+            ];
+        }
+
+        return [
+            'success' => true,
+            'path' => '/uploads/' . $uploadDir . '/' . $newFileName
+        ];
     }
 }

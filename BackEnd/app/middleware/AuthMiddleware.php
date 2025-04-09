@@ -72,4 +72,15 @@ class AuthMiddleware {
         
         return base64_encode(json_encode($payload));
     }
+
+    public static function validatePassword($inputPassword, $hashedPassword) {
+        return password_verify($inputPassword, $hashedPassword);
+    }
+
+    public function validateLogin($user, $password) {
+        if (!$user || !password_verify($password, $user['password'])) {
+            return false;
+        }
+        return true;
+    }
 }
