@@ -41,8 +41,110 @@ const apiClient = {
 
 // Auth Service
 const AuthService = {
-    // Demo accounts
-    accounts: [
+    // Store registered users in localStorage
+    getRegisteredUsers() {
+        const users = localStorage.getItem('registeredUsers');
+        return users ? JSON.parse(users) : [];
+    },
+
+    saveRegisteredUsers(users) {
+        localStorage.setItem('registeredUsers', JSON.stringify(users));
+    },
+
+    // Xóa người dùng theo email
+    deleteUser(email) {
+        try {
+            const users = this.getRegisteredUsers();
+            const userIndex = users.findIndex(user => user.email === email);
+            
+            if (userIndex === -1) {
+                throw new Error('Không tìm thấy người dùng với email này.');
+            }
+
+            // Xóa người dùng khỏi danh sách
+            users.splice(userIndex, 1);
+            this.saveRegisteredUsers(users);
+
+            // Nếu người dùng đang đăng nhập là người bị xóa, đăng xuất họ
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (currentUser && currentUser.email === email) {
+                localStorage.removeItem('currentUser');
+            }
+
+            return true;
+        } catch (error) {
+            console.error('Delete user failed:', error);
+            throw error;
+        }
+    },
+
+    // Lấy danh sách email của tất cả người dùng đã đăng ký
+    getAllUserEmails() {
+        const users = this.getRegisteredUsers();
+        return users.map(user => user.email);
+    },
+
+    async register(userData) {
+        try {
+            // First check if email already exists
+            const users = this.getRegisteredUsers();
+            if (users.some(user => user.email === userData.email)) {
+                throw new Error('Email đã được sử dụng. Vui lòng chọn email khác.');
+            }
+
+            // Add new user
+            const newUser = {
+                ...userData,
+                id: Date.now(), // Simple way to generate unique ID
+                createdAt: new Date().toISOString()
+            };
+
+            // Save to localStorage
+            users.push(newUser);
+            this.saveRegisteredUsers(users);
+
+            // Auto login after registration
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
+            
+            console.log('Registration successful:', newUser);
+            return true;
+        } catch (error) {
+            console.error('Registration failed:', error);
+            throw error;
+        }
+    },
+
+    async login(email, password) {
+        // First check registered users
+        const users = this.getRegisteredUsers();
+        const registeredUser = users.find(user => 
+            user.email === email && user.password === password
+        );
+
+        if (registeredUser) {
+            console.log('Registered user login successful:', registeredUser);
+            localStorage.setItem('currentUser', JSON.stringify(registeredUser));
+            return true;
+        }
+
+        // If no registered user matches, try demo accounts
+        const demoAccount = this.demoAccounts.find(acc => 
+            acc.email === email && acc.password === password
+        );
+        
+        if (demoAccount) {
+            console.log('Demo account login successful:', demoAccount);
+            localStorage.setItem('currentUser', JSON.stringify(demoAccount));
+            return true;
+        }
+
+        // If no account matches
+        console.log('Login failed: Invalid credentials');
+        return false;
+    },
+
+    // Demo accounts for testing
+    demoAccounts: [
         {
             email: "admin@gmail.com",
             password: "admin123",
@@ -60,198 +162,99 @@ const AuthService = {
         }
     ],
 
-    async login(email, password) {
-        const account = this.accounts.find(acc => 
-            acc.email === email && acc.password === password
-        );
-        
-        if (account) {
-            localStorage.setItem("currentUser", JSON.stringify(account));
-            return true;
-        }
-
-        try {
-            const response = await apiClient.request('/auth/login', {
-                method: 'POST',
-                body: JSON.stringify({ email, password })
-            });
-            
-            if (response.token) {
-                localStorage.setItem('token', response.token);
-                localStorage.setItem('user', JSON.stringify(response.user));
-                return true;
-            }
-            return false;
-        } catch (error) {
-            console.error('Login failed:', error);
-            throw error;
-        }
-    },
-    
-    async register(userData) {
-        try {
-            const response = await apiClient.request('/auth/register', {
-                method: 'POST',
-                body: JSON.stringify(userData)
-            });
-            
-            if (response.success) {
-                return await this.login(userData.email, userData.password);
-            }
-            return false;
-        } catch (error) {
-            console.error('Registration failed:', error);
-            throw error;
-        }
-    },
-    
-    async forgotPassword(email) {
-        try {
-            const response = await apiClient.request('/auth/forgot-password', {
-                method: 'POST',
-                body: JSON.stringify({ email })
-            });
-            return response;
-        } catch (error) {
-            console.error('Forgot password request failed:', error);
-            throw error;
-        }
-    },
-    
-    async resetPassword(token, newPassword) {
-        try {
-            const response = await apiClient.request('/auth/reset-password', {
-                method: 'POST',
-                body: JSON.stringify({ token, newPassword })
-            });
-            return response;
-        } catch (error) {
-            console.error('Password reset failed:', error);
-            throw error;
-        }
-    },
-    
-    async verifyEmail(token) {
-        try {
-            const response = await apiClient.request('/auth/verify-email', {
-                method: 'POST',
-                body: JSON.stringify({ token })
-            });
-            return response;
-        } catch (error) {
-            console.error('Email verification failed:', error);
-            throw error;
-        }
-    },
-    
     logout() {
         localStorage.removeItem('token');
-        localStorage.removeItem('user');
-        window.location.href = '/FrontEnd/Login-Register/Login/login.html';
+        localStorage.removeItem('currentUser');
     },
-    
+
     isAuthenticated() {
-        return !!localStorage.getItem('token');
+        return localStorage.getItem('currentUser') !== null;
     },
-    
+
     getUser() {
-        const user = localStorage.getItem('user');
+        const user = localStorage.getItem('currentUser');
         return user ? JSON.parse(user) : null;
     }
 };
 
 // Store Service
 const StoreService = {
-    async getProducts(filters = {}) {
-        try {
-            const queryString = new URLSearchParams(filters).toString();
-            const response = await apiClient.request(`/products?${queryString}`);
-            return response.data;
-        } catch (error) {
-            console.error('Failed to fetch products:', error);
-            throw error;
-        }
+    async getProducts() {
+        return [
+            {
+                id: 1,
+                name: "Gaming Mouse G502",
+                description: "Chuột gaming cao cấp với RGB và DPI tùy chỉnh",
+                price: 500000,
+                image: "gaming-mouse.webp",
+                stock: 10
+            },
+            {
+                id: 2, 
+                name: "Mechanical Keyboard K100",
+                description: "Bàn phím cơ chuyên game với switch Cherry MX",
+                price: 1200000,
+                image: "gaming-keyboard.avif",
+                stock: 5
+            },
+            {
+                id: 3,
+                name: "Gaming Headset Cloud II",  
+                description: "Tai nghe 7.1 với micro khử tiếng ồn",
+                price: 800000,
+                image: "gaming-headset.jpg",
+                stock: 8
+            },
+            {
+                id: 4,
+                name: "Gaming Chair DXRacer",
+                description: "Ghế gaming cao cấp với đệm êm ái",
+                price: 3500000,
+                image: "gaming-chair.jpg",
+                stock: 3
+            },
+            {
+                id: 5,
+                name: "Gaming Monitor 27\" 165Hz",
+                description: "Màn hình gaming 27 inch, 165Hz, 1ms, G-Sync",
+                price: 6500000,
+                image: "gaming-monitor.avif",
+                stock: 6
+            },
+            {
+                id: 6,
+                name: "Gaming Laptop RTX 4070",
+                description: "Laptop gaming với RTX 4070, i7, 16GB RAM, 1TB SSD",
+                price: 25000000,
+                image: "gaming-laptop.webp",
+                stock: 4
+            },
+            {
+                id: 7,
+                name: "Gaming Desk RGB",
+                description: "Bàn gaming cao cấp với LED RGB và quản lý dây cáp",
+                price: 2800000,
+                image: "gaming-desk.jpg",
+                stock: 7
+            },
+            {
+                id: 8,
+                name: "Ultimate Gaming Bundle",
+                description: "Bộ gaming full setup: Chuột + Bàn phím + Tai nghe + Mousepad",
+                price: 4500000,
+                image: "gaming-bundle.jpg",
+                stock: 3
+            }
+        ];
     },
-    
-    async getProductById(id) {
-        try {
-            const response = await apiClient.request(`/products/${id}`);
-            return response.data;
-        } catch (error) {
-            console.error('Failed to fetch product details:', error);
-            throw error;
-        }
-    },
-    
+
     async createOrder(orderData) {
-        try {
-            const response = await apiClient.request('/orders', {
-                method: 'POST',
-                body: JSON.stringify(orderData)
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Failed to create order:', error);
-            throw error;
-        }
-    },
-    
-    async getOrderHistory() {
-        try {
-            const response = await apiClient.request('/orders/history');
-            return response.data;
-        } catch (error) {
-            console.error('Failed to fetch order history:', error);
-            throw error;
-        }
-    },
-    
-    async addToCart(productId, quantity) {
-        try {
-            const response = await apiClient.request('/cart', {
-                method: 'POST',
-                body: JSON.stringify({ productId, quantity })
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Failed to add to cart:', error);
-            throw error;
-        }
-    },
-    
-    async getCart() {
-        try {
-            const response = await apiClient.request('/cart');
-            return response.data;
-        } catch (error) {
-            console.error('Failed to fetch cart:', error);
-            throw error;
-        }
-    },
-    
-    async updateCartItem(itemId, quantity) {
-        try {
-            const response = await apiClient.request(`/cart/${itemId}`, {
-                method: 'PUT',
-                body: JSON.stringify({ quantity })
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Failed to update cart item:', error);
-            throw error;
-        }
-    },
-    
-    async removeFromCart(itemId) {
-        try {
-            const response = await apiClient.request(`/cart/${itemId}`, {
-                method: 'DELETE'
-            });
-            return response.data;
-        } catch (error) {
-            console.error('Failed to remove from cart:', error);
-            throw error;
-        }
+        // Mock API call để tạo order
+        console.log("Order created:", orderData);
+        return {
+            success: true,
+            message: "Order created successfully"
+        };
     }
 };
 
@@ -395,8 +398,8 @@ const UserService = {
     }
 };
 
-// Export all services
-window.API = {
+// Export API
+const API = {
     config: API_CONFIG,
     client: apiClient,
     auth: AuthService,
@@ -406,122 +409,5 @@ window.API = {
     users: UserService
 };
 
-const API = {
-    auth: {
-        accounts: [
-            {
-                email: "admin@gmail.com",
-                password: "admin123",
-                username: "Admin"
-            },
-            {
-                email: "user@gmail.com",
-                password: "user123",
-                username: "User"
-            }
-        ],
-
-        login(email, password) {
-            const account = this.accounts.find(acc => 
-                acc.email === email && acc.password === password
-            );
-            
-            if (account) {
-                console.log('Login successful:', account); // Debugging log
-                localStorage.setItem('currentUser', JSON.stringify(account));
-                return true;
-            }
-            console.log('Login failed'); // Debugging log
-            return false;
-        },
-
-        logout() {
-            console.log('Clearing user data from localStorage'); // Debugging log
-            localStorage.removeItem('currentUser');
-        },
-
-        isAuthenticated() {
-            return localStorage.getItem('currentUser') !== null;
-        }
-    },
-
-    store: {
-        getProducts: async function() {
-            return [
-                {
-                    id: 1,
-                    name: "Gaming Mouse G502",
-                    description: "Chuột gaming cao cấp với RGB và DPI tùy chỉnh",
-                    price: 500000,
-                    image: "gaming-mouse.webp",
-                    stock: 10
-                },
-                {
-                    id: 2, 
-                    name: "Mechanical Keyboard K100",
-                    description: "Bàn phím cơ chuyên game với switch Cherry MX",
-                    price: 1200000,
-                    image: "gaming-keyboard.avif",
-                    stock: 5
-                },
-                {
-                    id: 3,
-                    name: "Gaming Headset Cloud II",  
-                    description: "Tai nghe 7.1 với micro khử tiếng ồn",
-                    price: 800000,
-                    image: "gaming-headset.jpg",
-                    stock: 8
-                },
-                {
-                    id: 4,
-                    name: "Gaming Chair DXRacer",
-                    description: "Ghế gaming cao cấp với đệm êm ái",
-                    price: 3500000,
-                    image: "gaming-chair.jpg",
-                    stock: 3
-                },
-                {
-                    id: 5,
-                    name: "Gaming Monitor 27\" 165Hz",
-                    description: "Màn hình gaming 27 inch, 165Hz, 1ms, G-Sync",
-                    price: 6500000,
-                    image: "gaming-monitor.avif",
-                    stock: 6
-                },
-                {
-                    id: 6,
-                    name: "Gaming Laptop RTX 4070",
-                    description: "Laptop gaming với RTX 4070, i7, 16GB RAM, 1TB SSD",
-                    price: 35000000,
-                    image: "gaming-laptop.webp",
-                    stock: 4
-                },
-                {
-                    id: 7,
-                    name: "Gaming Desk RGB",
-                    description: "Bàn gaming cao cấp với LED RGB và quản lý dây cáp",
-                    price: 2800000,
-                    image: "gaming-desk.jpg",
-                    stock: 7
-                },
-                {
-                    id: 8,
-                    name: "Ultimate Gaming Bundle",
-                    description: "Bộ gaming full setup: Chuột + Bàn phím + Tai nghe + Mousepad",
-                    price: 4500000,
-                    image: "gaming-bundle.jpg",
-                    stock: 3
-                }
-            ];
-        },
-
-        createOrder: async function(orderData) {
-            // Mock API call để tạo order
-            console.log("Order created:", orderData);
-            return {
-                success: true,
-                message: "Order created successfully"
-            };
-        }
-    }
-};
+// Export to global scope
+window.API = API;

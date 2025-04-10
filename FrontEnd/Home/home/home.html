@@ -39,8 +39,17 @@
                 <input type="text" id="search-input" placeholder="Nhập từ khóa..." />
                 <button onclick="searchGames()">🔎 Tìm kiếm</button>
             </div>
-            <div id="auth-section">
-                <!-- Sẽ được tự động cập nhật bởi updateAuthSection() -->
+            <div class="user-menu">
+                <div id="userInfo" style="display: none;">
+                    <span id="username"></span>
+                    <button onclick="handleLogout()" class="logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Đăng xuất
+                    </button>
+                </div>
+                <div id="authButtons" class="auth-buttons">
+                    <a href="../../Login-Register/Login/login.html" class="auth-btn">Đăng nhập</a>
+                    <a href="../../Login-Register/Register/register.html" class="auth-btn">Đăng ký</a>
+                </div>
             </div>
         </div>
     </header>    
@@ -275,6 +284,37 @@
             });
         }
 
+        // Kiểm tra trạng thái đăng nhập
+        function checkLoginStatus() {
+            const userInfo = document.getElementById('userInfo');
+            const authButtons = document.getElementById('authButtons');
+            const usernameSpan = document.getElementById('username');
+            
+            // Lấy thông tin user từ localStorage
+            const user = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (user) {
+                // Đã đăng nhập
+                userInfo.style.display = 'flex';
+                authButtons.style.display = 'none';
+                usernameSpan.textContent = `Xin chào, ${user.username}`;
+            } else {
+                // Chưa đăng nhập
+                userInfo.style.display = 'none';
+                authButtons.style.display = 'flex';
+            }
+        }
+
+        // Xử lý đăng xuất
+        window.handleLogout = function() {
+            localStorage.removeItem('currentUser');
+            checkLoginStatus();
+            window.location.href = '../../Login-Register/Login/login.html';
+        };
+
+        // Kiểm tra trạng thái đăng nhập khi trang load
+        checkLoginStatus();
+
         // Update Auth Section
         function updateAuthSection() {
             const authSection = document.getElementById('auth-section');
@@ -304,17 +344,6 @@
                 console.error('Error updating auth section:', error);
             }
         }
-
-        // Logout Handler
-        window.handleLogout = function() {
-            try {
-                API.auth.logout();
-                updateAuthSection();
-                window.location.href = '../../Login-Register/Login/login.html';
-            } catch (error) {
-                console.error('Error during logout:', error);
-            }
-        };
 
         // Initialize auth section
         updateAuthSection();
