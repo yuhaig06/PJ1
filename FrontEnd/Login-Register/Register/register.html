@@ -21,12 +21,20 @@
             <h2>Đăng ký tài khoản</h2>
             <form id="registerForm" onsubmit="return handleRegister(event)">
                 <div class="input-group">
+                    <input type="text" id="fullname" placeholder="Họ và tên" required>
+                    <span class="input-icon">👤</span>
+                </div>
+                <div class="input-group">
                     <input type="text" id="username" placeholder="Tên đăng nhập" required>
                     <span class="input-icon">👤</span>
                 </div>
                 <div class="input-group">
                     <input type="email" id="email" placeholder="Email" required>
                     <span class="input-icon">✉</span>
+                </div>
+                <div class="input-group">
+                    <input type="tel" id="phone" placeholder="Số điện thoại" required>
+                    <span class="input-icon">📱</span>  
                 </div>
                 <div class="input-group">
                     <input type="password" id="password" placeholder="Mật khẩu" required>
@@ -59,7 +67,6 @@
 
     <script src="../../config/api.js"></script>
     <script>
-        // Check if user is already logged in
         if (API.auth.isAuthenticated()) {
             window.location.href = '../../Home/home/home.html';
         }
@@ -67,38 +74,67 @@
         async function handleRegister(event) {
             event.preventDefault();
             
-            const username = document.getElementById('username').value;
-            const email = document.getElementById('email').value;
+            const fullname = document.getElementById('fullname').value.trim();
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
             const password = document.getElementById('password').value;
             const confirmPassword = document.getElementById('confirmPassword').value;
             
-            // Validate password match
+            // Validate inputs
+            if (fullname.length < 2) {
+                showError('Họ tên phải có ít nhất 2 ký tự');
+                return false;
+            }
+
+            if (username.length < 4) {
+                showError('Tên đăng nhập phải có ít nhất 4 ký tự');
+                return false;
+            }
+
+            // Email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showError('Email không hợp lệ');
+                return false;
+            }
+
+            // Password validation  
+            if (password.length < 8) {
+                showError('Mật khẩu phải có ít nhất 8 ký tự');
+                return false;
+            }
+
             if (password !== confirmPassword) {
                 showError('Mật khẩu xác nhận không khớp');
                 return false;
             }
-            
-            // Validate password strength
-            if (password.length < 8) {
-                showError('Mật khẩu phải có ít nhất 8 ký tự');
+
+            // Phone validation
+            const phoneRegex = /(84|0[3|5|7|8|9])+([0-9]{8})\b/;
+            if (!phoneRegex.test(phone)) {
+                showError('Số điện thoại không hợp lệ');
                 return false;
             }
             
             try {
                 const userData = {
+                    fullname,
                     username,
                     email,
+                    phone,
                     password
                 };
                 
                 const success = await API.auth.register(userData);
                 if (success) {
+                    // Nếu đăng ký và đăng nhập thành công, chuyển đến trang chủ
                     window.location.href = '../../Home/home/home.html';
-                } else {
-                    showError('Đăng ký thất bại. Vui lòng thử lại.');
                 }
+                
             } catch (error) {
-                showError('Có lỗi xảy ra trong quá trình đăng ký');
+                console.error('Registration error:', error);
+                showError(error.message || 'Lỗi kết nối server. Vui lòng thử lại sau.');
             }
             
             return false;
@@ -108,13 +144,22 @@
             const errorDiv = document.createElement('div');
             errorDiv.className = 'error-message';
             errorDiv.textContent = message;
+            errorDiv.style.color = 'red';
+            errorDiv.style.marginBottom = '10px';
+            errorDiv.style.textAlign = 'center';
             
             const form = document.getElementById('registerForm');
+            // Xóa thông báo lỗi cũ nếu có
+            const oldError = form.querySelector('.error-message');
+            if (oldError) {
+                oldError.remove();
+            }
+            
             form.insertBefore(errorDiv, form.firstChild);
             
             setTimeout(() => {
                 errorDiv.remove();
-            }, 3000);
+            }, 5000);
         }
 
         // Add animation to form elements

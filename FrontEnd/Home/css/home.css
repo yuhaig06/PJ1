@@ -296,7 +296,7 @@ body.menu-open::after {
     background: #007bff;
     color: white;
     border-color: #ffcc00;
-    box-shadow: 0 4px 12px rgba(255, 204, 0, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.6);
     transform: scale(1.05);
 }
 
@@ -1290,6 +1290,44 @@ html {
     box-shadow: 0 4px 12px rgba(0, 123, 255, 0.2);
 }
 
+/* Auth buttons styling */
+.auth-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.auth-btn {
+    background: transparent;
+    border: 2px solid #007bff;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px; /* Đồng bộ chiều cao với nút tìm kiếm */
+}
+
+.auth-btn:hover {
+    background: #007bff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    .auth-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+        height: 36px;
+    }
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
     .user-info {
@@ -1540,4 +1578,92 @@ html {
 
 .search-results::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+/* Username display style */
+#username {
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px; /* Giới hạn chiều rộng tối đa */
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Responsive adjustment for username */
+@media (max-width: 768px) {
+    #username {
+        max-width: 100px; /* Thu nhỏ lại trên mobile */
+        font-size: 13px;
+    }
+}
+
+/* User menu alignment */
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#userInfo {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    background: transparent;
+    border: 2px solid #007bff;
+    padding: 8px 15px;
+    border-radius: 20px;
+    height: 40px; /* Đảm bảo chiều cao cố định */
+}
+
+#username {
+    color: white;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px;
+    line-height: 24px; /* Căn giữa chiều cao với nút */
+    vertical-align: middle;
+}
+
+.logout-btn {
+    background: transparent;
+    border: 2px solid #dc3545;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 15px;
+    height: 24px; /* Chiều cao bằng với line-height của username */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+    margin: 0;
+}
+
+/* Responsive adjustment */
+@media (max-width: 768px) {
+    #userInfo {
+        height: 36px; /* Giảm chiều cao trên mobile */
+        padding: 6px 12px;
+    }
+
+    #username {
+        max-width: 100px;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .logout-btn {
+        height: 20px;
+        padding: 4px 10px;
+        font-size: 13px;
+    }
 }

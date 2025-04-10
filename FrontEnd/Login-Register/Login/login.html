@@ -48,9 +48,9 @@
 
     <script src="../../config/api.js"></script>
     <script>
-        // Check if user is already logged in
+        // Kiểm tra đăng nhập ngay khi tải trang
         if (API.auth.isAuthenticated()) {
-            window.location.href = '../../Home/home/home.html';
+            window.location.replace('../../Home/Home/home.html');
         }
 
         async function handleLogin(event) {
@@ -61,19 +61,31 @@
             const remember = document.getElementById('remember').checked;
             
             try {
-                const success = await API.auth.login(email, password);
-                if (success) {
+                const demoAccounts = [
+                    { email: "admin@gmail.com", password: "admin123", username: "Admin" },
+                    { email: "user@gmail.com", password: "user123", username: "User" },
+                    { email: "test@gmail.com", password: "test123", username: "Test" }
+                ];
+
+                const demoAccount = demoAccounts.find(acc => 
+                    acc.email === email && acc.password === password
+                );
+
+                if (demoAccount) {
+                    localStorage.setItem('token', 'demo_token');
+                    localStorage.setItem('user', JSON.stringify(demoAccount));
                     if (remember) {
                         localStorage.setItem('rememberMe', 'true');
                     }
-                    window.location.href = '../../Home/home/home.html';
+                    window.location.replace('../../Home/Home/home.html');
+                    return;
                 } else {
                     showError('Email hoặc mật khẩu không đúng');
                 }
             } catch (error) {
+                console.error('Lỗi đăng nhập:', error);
                 showError('Đăng nhập thất bại. Vui lòng thử lại sau.');
             }
-            
             return false;
         }
 
